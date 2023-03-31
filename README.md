@@ -3,6 +3,6 @@
 
 -------------------------------------------------------
 
-Live update Poll application. Using Express, Handlebars, MongoDb, Socket.io, Bootstrap.
+Poll application using Express, Handlebars, MongoDb, Passport Auth.
 
 Live Site: <https://mm-comp2106-assignment3.onrender.com>
