@@ -40,5 +40,5 @@ const pollSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('Employer', employerSchema);
+module.exports = mongoose.model('Poll', pollSchema);
 

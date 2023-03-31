@@ -1,34 +1,42 @@
-<h1>Register</h1>
-{{#if messages}}
-<p class="alert alert-danger">{{messages}}</p>
-{{else}}
-<p class="alert alert-secondary">Please create an account.</p>
-{{/if}}
 
+
+<!-- REGISTER START -->
+<!-- PAGE HEADER -->
+<section id="page-top-container">
+    <div>
+       <i class="fa-solid fa-address-card"></i>
+    </div>
+    <div>
+        <h1>register</h1>
+    </div>
+</section>
+<!-- PAGE HEADER END -->
+<!-- PAGE CONTENT -->
+<section id="login-tab">
+{{#if messages}}
+  <p class="error-message-bad">{{messages}}</p>
+  {{else}}
+  <p class="error-message">Please create an account</p>
+{{/if}}
 <form method="post">
-  <fieldset class="form-group">
-    <label for="username" class="col-2 control-label">Username: *</label>
+  <fieldset>
     <input
       name="username"
       id="username"
       required
       type="email"
-      placeholder="email@email.com"
+      placeholder="YOU@EMAIL.COM"
     />
-  </fieldset>
-  <fieldset class="form-group">
-    <label for="password" class="col-2 control-label">Password: *</label>
+
     <input
       name="password"
       id="password"
       type="password"
       required
       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      placeholder="PASSWORD"
     />
-  <img src="/images/show.png" id="imgShowHide" alt="Show PW" onClick="showHidePassword()"/>
-  </fieldset> 
-  <fieldset class="form-group">
-    <label for="confirm" class="col-2 control-label">Confirm: *</label>
+
     <input
       name="confirm"
       id="confirm"
@@ -36,14 +44,13 @@
       onkeyup="return comparePasswords();"
       required
       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+      placeholder="CONFIRM"
     />
-    <span id="pwMsg"></span>
-  </fieldset>
-  <fieldset class="form-group">
-    <button class="btn btn-secondary offset-3" onclick="return comparePasswords();">Register</button>
-    <a href="/auth/google"><img src="/images/google_signin.png" alt="Sign in with google" /></a>
-    <hr />
-    Already have an account?
-    <a href="/auth/login" title="Login">Login</a>
-  </fieldset>
+    <span id="pwMessage"></span>
+    <a href="/users/google"><i class="fa-brands fa-google"></i>Register with Google</a>
+    <button onclick="return comparePasswords();">Register</button>
+</fieldset>
 </form>
+</section>
+<!-- PAGE CONTENT END -->
+<!-- REGISTER END -->

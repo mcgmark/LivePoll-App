@@ -1,0 +1,31 @@
+<!-- CREATE POLL START -->
+<!-- PAGE HEADER -->
+<section id="page-top-container">
+    <div>
+       <i class="fa-solid fa-pen"></i>
+    </div>
+    <div>
+        <h1>Create Poll</h1>
+    </div>
+</section>
+<!-- PAGE HEADER END -->
+<!-- PAGE CONTENT -->
+<section id="login-tab">
+{{#if messages}}
+<p class="error-message-bad">creating poll failed</p>
+{{else}}
+<p class="error-message">please create your poll question and click start</p>
+{{/if}}
+<form method="post">
+  <fieldset>
+    <textarea name="question" id="question" placeholder="QUESTION? (REQUIRED)"></textarea>
+    <input type="text" name="answerOne" id="answerOne" placeholder="Option #1 (required)" required />
+    <input type="text" name="answerTwo" id="answerTwo" placeholder="Option #2 (required)" required />
+    <input type="text" name="answerThree" id="answerThree" placeholder="Option #3" />
+    <input type="text" name="answerFour" id="answerFour" placeholder="Option #4" />
+   </fieldset>
+  <button>Start</button>
+</form>
+</section>
+<!-- PAGE CONTENT END -->
+<!-- LOGIN END -->

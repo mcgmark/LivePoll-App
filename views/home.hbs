@@ -1,2 +1,36 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<!-- HOME CONTENT START -->
+<section id="page-top-container">
+    <div>
+       <i class="fa-solid fa-thumbs-up"></i> 
+    </div>
+    <div>
+        <h1>Welcome</h1>
+    </div>
+</section>
+<section id="login-tab">
+    <table>
+        <thead>
+            <th>Polls</th>
+        </thead>
+        <tbody>
+        {{#each polls}}
+            <tr>
+                <td>
+                    <a href="/polls/{{this.id}}" title="view">{{this.question}}</a>
+                </td>
+                {{#if ../user}}
+                <td class="text-center">
+                    <a href="/polls/edit/{{this.id}}" title="Edit"><i class="fa-solid fa-pen"></i></a>  
+                    <a href="/polls/delete/{{this.id}}" title="Delete" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>  
+                </td>
+                {{/if}}
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    {{#if user}}
+    <button onclick="location.href='/polls/create'">Create Poll</button>
+    {{/if}}
+</section>
+<!-- HOME CONTENT END -->
+

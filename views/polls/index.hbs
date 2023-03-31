@@ -1,0 +1,31 @@
+<!-- HOME CONTENT START -->
+<section id="page-top-container">
+    <div>
+       <i class="fa-solid fa-hand-fist"></i>
+    </div>
+    <div>
+        <h1>Vote</h1>
+    </div>
+</section>
+<section id="login-tab">
+    {{#if messages}}
+        <p class="error-message-bad">{{messages}}</p>
+    {{else}}
+        <p class="error-message">this is your opportunity submit your vote</p>
+    {{/if}}
+    <p class="question">{{poll.question}}</p>
+    <form method="post" action="/polls/vote/{{poll._id}}">
+        <fieldset class="poll-answers">
+            <div><input type="radio" name="vote" id="answerOne" value="answerOneCount" required /><label for="answerOne">{{poll.answerOne}}</label><span class="vote-count">{{poll.answerOneCount}}</span></div>
+            <div><input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required /><label for="answerTwo">{{poll.answerTwo}}</label><span class="vote-count">{{poll.answerTwoCount}}</span></div>
+            {{#if poll.answerThree}}
+            <div><input type="radio" name="vote" id="answerThree" value="answerThreeCount" required /><label for="answerThree">{{poll.answerThree}}</label><span class="vote-count">{{poll.answerThreeCount}}</span></div>
+            {{/if}}
+            {{#if poll.answerFour}}
+            <div><input type="radio" name="vote" id="answerFour" value="answerFourCount" required /><label for="answerFour">{{poll.answerFour}}</label><span class="vote-count">{{poll.answerFourCount}}</span></div>
+            {{/if}}
+        </fieldset>
+        <button >vote</button>
+    </form>
+</section>
+<!-- HOME CONTENT END -->

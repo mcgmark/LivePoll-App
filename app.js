@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const index = require('./controllers/index');
 const users = require('./controllers/users');
+const polls = require('./controllers/polls');
 
 const app = express();
 
@@ -20,9 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // Add folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
-
+app.use('/fontawesome', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')));
 
 // Use dotenv to read .env file for user environment variables (aka secrets)
 if(process.env.NODE_ENV != 'production'){
@@ -59,12 +60,32 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+
+// google auth strategy for passport
+// 1) Authentication with google API keys
+// 2) Check if we already have this user w/this Google id in the users collection
+// 3) If user not found create a new user in the collection
+const googleStrategy = require('passport-google-oauth20').Strategy;
+passport.use(new googleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
+}, (accessToken, refreshToken, profile, done) => {
+  User.findOrCreate({oauthId: profile.id }, {
+    username: profile.displayName,
+    oauthProvider: 'Google'
+  }, (err, user) => {
+    return done(err, user);
+  })
+}));
+
 // passport end
 
 // ROUTES
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/polls', polls);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

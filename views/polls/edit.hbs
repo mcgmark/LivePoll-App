@@ -1,0 +1,36 @@
+<!-- CREATE POLL START -->
+<!-- PAGE HEADER -->
+<section id="page-top-container">
+    <div>
+       <i class="fa-solid fa-pen"></i>
+    </div>
+    <div>
+        <h1>Edit Poll</h1>
+    </div>
+</section>
+<!-- PAGE HEADER END -->
+<!-- PAGE CONTENT -->
+<section id="login-tab">
+{{#if messages}}
+<p class="error-message-bad">editing poll failed</p>
+{{else}}
+<p class="error-message">Please edit your poll</p>
+{{/if}}
+<form method="post">
+  <fieldset>
+    <textarea name="question" id="question">{{poll.question}}</textarea>
+    <input type="text" name="answerOne" id="answerOne" value="{{poll.answerOne}}" required />
+    <input type="text" name="answerTwo" id="answerTwo" value="{{poll.answerTwo}}" required />
+    {{#if poll.answerTwo}}
+        <input type="text" name="answerThree" value="{{poll.answerThree}}" id="answerThree" />
+    {{/if}}
+    {{#if poll.answerTwo}}
+        <input type="text" name="answerFour" id="answerFour" value="{{poll.answerFour}}" />
+    {{/if}}
+   </fieldset>
+  <button>Save</button>
+  <button type="cancel" onclick="window.history.go(-1); return false;">cancel</button>
+</form>
+</section>
+<!-- PAGE CONTENT END -->
+<!-- LOGIN END -->

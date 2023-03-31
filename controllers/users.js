@@ -25,7 +25,7 @@ router.post('/register', (req, res) => {
             req.session.messages = err; 
             res.redirect('/users/register');
         } else {
-            res.redirect('/');
+            res.redirect('/users/login');
         }
     });
 });
@@ -57,6 +57,17 @@ router.get('/logout', (req, res) => {
         }
     });
 });
+
+
+router.get('/google', passport.authenticate('google', {
+    scope: ['profile']
+}), (req, res) => {});
+
+router.get('/google/callback', passport.authenticate('google', {
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureMessage: 'Could not authenticate with google'
+}))
 
 
 module.exports = router;
