@@ -126,6 +126,10 @@ p.error-message {
   margin: 2rem auto 1rem auto;
 }
 
+p.login{
+  text-transform: none;
+}
+
 p.error-message-bad {
   font-family: 'Oswald';
   font-style: normal;
