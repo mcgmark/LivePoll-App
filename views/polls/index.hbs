@@ -16,13 +16,13 @@
     <p class="question">{{poll.question}}</p>
     <form>
         <fieldset class="poll-answers">
-            <div><input type="radio" name="vote" id="answerOne" value="answerOneCount" required /><label for="answerOne">{{poll.answerOne}}</label><span class="vote-count">{{poll.answerOneCount}}</span></div>
-            <div><input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required /><label for="answerTwo">{{poll.answerTwo}}</label><span class="vote-count">{{poll.answerTwoCount}}</span></div>
+            <div><input type="radio" name="vote" id="answerOne" value="answerOneCount" required /><label for="answerOne">{{poll.answerOne}}</label><span id="answerOneCount" class="vote-count">{{poll.answerOneCount}}</span></div>
+            <div><input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required /><label for="answerTwo">{{poll.answerTwo}}</label><span id="answerTwoCount" class="vote-count">{{poll.answerTwoCount}}</span></div>
             {{#if poll.answerThree}}
-            <div><input type="radio" name="vote" id="answerThree" value="answerThreeCount" required /><label for="answerThree">{{poll.answerThree}}</label><span class="vote-count">{{poll.answerThreeCount}}</span></div>
+            <div><input type="radio" name="vote" id="answerThree" value="answerThreeCount" required /><label for="answerThree">{{poll.answerThree}}</label><span id="answerThreeCount" class="vote-count">{{poll.answerThreeCount}}</span></div>
             {{/if}}
             {{#if poll.answerFour}}
-            <div><input type="radio" name="vote" id="answerFour" value="answerFourCount" required /><label for="answerFour">{{poll.answerFour}}</label><span class="vote-count">{{poll.answerFourCount}}</span></div>
+            <div><input type="radio" name="vote" id="answerFour" value="answerFourCount" required /><label for="answerFour">{{poll.answerFour}}</label><span id="answerFourCount" class="vote-count">{{poll.answerFourCount}}</span></div>
             {{/if}}
         </fieldset>
         <button id="vote-btn" data-pollid="{{poll._id}}">vote</button>
