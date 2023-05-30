@@ -14,7 +14,7 @@
         <p class="error-message">this is your opportunity submit your vote</p>
     {{/if}}
     <p class="question">{{poll.question}}</p>
-    <form method="post" action="/polls/vote/{{poll._id}}">
+    <form>
         <fieldset class="poll-answers">
             <div><input type="radio" name="vote" id="answerOne" value="answerOneCount" required /><label for="answerOne">{{poll.answerOne}}</label><span class="vote-count">{{poll.answerOneCount}}</span></div>
             <div><input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required /><label for="answerTwo">{{poll.answerTwo}}</label><span class="vote-count">{{poll.answerTwoCount}}</span></div>
@@ -25,7 +25,7 @@
             <div><input type="radio" name="vote" id="answerFour" value="answerFourCount" required /><label for="answerFour">{{poll.answerFour}}</label><span class="vote-count">{{poll.answerFourCount}}</span></div>
             {{/if}}
         </fieldset>
-        <button >vote</button>
+        <button id="vote-btn" data-pollid="{{poll._id}}">vote</button>
     </form>
 </section>
 <!-- HOME CONTENT END -->

@@ -1,3 +1,5 @@
+const socket = io(); 
+
 function comparePasswords() {
     let pw1 = document.getElementById('password').value;
     let pw2 = document.getElementById('confirm').value;
@@ -13,3 +15,15 @@ function comparePasswords() {
         return true;
     }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    document.getElementById("vote-btn").onclick = function(e) {
+        e.preventDefault();
+        const vote = document.querySelector('input[name="vote"]:checked').value;
+        const pollId = this.dataset.pollid;
+        console.log(pollId + ' ' + vote);
+        socket.emit('pollVote', pollId, vote);
+    };
+
+});

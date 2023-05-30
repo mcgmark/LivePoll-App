@@ -58,46 +58,7 @@ router.get('/:id', async function(req, res) {
     }
   });
 
-  /* GET - Edit form view */
-router.get('/edit/:id', global.isAuthenticated, async function(req, res) { 
-    try {
-      const poll = await Poll.findById(req.params.id).exec();
-      if (!poll) {
-        console.log("Poll not found");
-        return res.status(404).json({ error: 'Poll not found' });
-      }
-      res.render('polls/edit', { 
-        poll: poll,
-      });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
-    }
-  });
-    
-    /* POST - Edit */
-    router.post('/edit/:id', global.isAuthenticated, async (req, res) => {
-      try {
-        const updatedPoll = await Poll.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.redirect('/');
-      } catch (err) {
-        res.status(900).json({ error: err.message });
-      }
-    });
-
-    /* POST - VOTE */ 
-    router.post('/vote/:id', async (req, res) => {
-        const pollId = req.params.id;
-        const voteCountField = req.body.vote;
-        try {
-          const updatedPoll = await Poll.updateOne(
-            { _id: pollId },
-            { $inc: { [voteCountField]: 1 } }
-          );
-          res.redirect('/polls/' + pollId);
-        } catch (err) {
-          res.status(500).json({ error: err.message });
-        }
-      });
+  
 
 // make public
 module.exports = router;
