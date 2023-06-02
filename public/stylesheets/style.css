@@ -114,6 +114,18 @@ section#login-tab {
   padding: 1rem 3rem;
 }
 
+p.messages {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #373737;
+  background: #b8ff99;
+  padding: .75rem;
+  margin: 2rem auto 1rem auto;
+}
+
 p.error-message {
   font-family: 'Oswald';
   font-style: normal;

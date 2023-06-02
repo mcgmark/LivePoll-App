@@ -51,7 +51,8 @@ router.get('/:id', global.hasVoted, async function(req, res) {
         title: 'Poll',
          poll: poll,
          user: req.user,
-         hasVoted: req.hasVoted
+         hasVoted: req.hasVoted,
+         messages: req.messages
         });
       }
     } catch (err) {

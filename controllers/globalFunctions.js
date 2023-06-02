@@ -20,6 +20,7 @@ exports.hasVoted = async (req, res, next) => {
         const existingVote = await Voter.findOne({ pollId, ipAddress });
         if (existingVote) {
             req.hasVoted = true;
+            req.messages = "Thank You For Voting!";
             next();
           } else {
             req.hasVoted = false;
