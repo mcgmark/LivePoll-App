@@ -211,12 +211,12 @@ fieldset.poll-answers div label {
   display: inline-block;
   font-family: 'Cabin', sans-serif;
   font-size: 1.5rem;
-  margin-left: 1rem;
 }
 
 fieldset.poll-answers div input[type="radio"] {
   display: inline-block;
   font-size: 3rem;
+  margin-right: 1rem;
 }
 
 fieldset.poll-answers div {

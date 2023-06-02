@@ -1,11 +1,13 @@
+const mongoose = require('mongoose');
 const Poll = require('../models/poll');
+const Voter = require('../models/voter');
 
 module.exports = io => {
+
     io.on('connection', (socket) => {
 
-        // Add user socket to pollId socketIO room for live updates
-        const pollId = socket.handshake.query.pollId;
-        socket.join(pollId);
+        // Grab user IP for vote tracking
+        const ipAddress = socket.handshake.address;
 
         // Initialize variables to store id of player socket client
         const userId = socket.id;
@@ -21,8 +23,8 @@ module.exports = io => {
         });
 
         // Handle poll votes
-        socket.on('pollVote', async (id,vote) => {
-            console.log('user voted');
+        socket.on('pollVote', async (id,vote,ip) => {
+            console.log(id);
             try {
                 const updatedPoll = await Poll.findOneAndUpdate(
                     { _id: id },
@@ -31,12 +33,11 @@ module.exports = io => {
                 );
                 const voteCount = updatedPoll[vote];     
                 io.to(id).emit('update-poll-results', vote, voteCount);
+                const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress });
                 console.log('vote success');
             } catch (err) {
                 console.log('vote error');
             }
         });
-
       });    
-
 };

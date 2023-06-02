@@ -41,7 +41,7 @@ router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
 
 // INDIVIDUAL
 /* GET - Read individual Poll by ID */
-router.get('/:id', async function(req, res) {
+router.get('/:id', global.hasVoted, async function(req, res) {
     try {
       const poll = await Poll.findById(req.params.id);
       if (!poll) {
@@ -50,7 +50,8 @@ router.get('/:id', async function(req, res) {
         res.render('polls/index', { 
         title: 'Poll',
          poll: poll,
-         user: req.user
+         user: req.user,
+         hasVoted: req.hasVoted
         });
       }
     } catch (err) {

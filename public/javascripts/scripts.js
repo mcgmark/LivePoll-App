@@ -35,11 +35,16 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(answer).textContent = answerCount;
     });
 
-    document.getElementById("vote-btn").onclick = function(e) {
+    document.getElementById("vote-btn").onclick = function(e,req) {
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         console.log(pollId + ' ' + vote);
         socket.emit('pollVote', pollId, vote);
+        document.querySelector('button').style.display = 'none';
+        const radioButtons = document.querySelectorAll('input[type=radio]')
+        for (let i = 0 ; i < radioButtons.length; i++) {
+            radioButtons[i].style.display = "none";
+        }
     };
 
 });
