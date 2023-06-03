@@ -17,11 +17,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    // grab poll id
-    let pollIdButton = document.getElementById("vote-btn");
-    if (pollIdButton) {
-        let pollId = pollId.dataset.pollId;
-    }
+    // grab poll id and vote button
+    const pollIdButton = document.getElementById("vote-btn");
+    const pollId = document.getElementById("question-container").dataset.pollid;
     console.log(pollId);
 
     // Join socketIO room with pollId
