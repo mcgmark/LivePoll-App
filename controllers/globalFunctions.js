@@ -16,9 +16,10 @@ exports.isAuthenticated = (req, res, next) => {
 // public function to check if user has voted
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
-    const clientIpAddress = req.ip;
+    const ipAddress = req.ip;
+    console.log(ipAddress);
     try {
-        const existingVote = await Voter.findOne({ pollId, clientIpAddress });
+        const existingVote = await Voter.findOne({ pollId, ipAddress });
         if (existingVote) {
             req.hasVoted = true;
             req.messages = "Thank You For Voting!";
