@@ -14,7 +14,7 @@ exports.isAuthenticated = (req, res, next) => {
 
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
-    const ipAddress = req.ip;
+    const ipAddress = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     try {
         console.log(pollId + ipAddress);
         const existingVote = await Voter.findOne({ pollId, ipAddress });
