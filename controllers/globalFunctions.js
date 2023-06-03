@@ -1,6 +1,7 @@
 const express = require('express');
-const Voter = require('../models/voter');
 const mongoose = require('mongoose');
+
+const Voter = require('../models/voter');
 
 // public function auth check for anywhere on the site
 exports.isAuthenticated = (req, res, next) => {
@@ -14,15 +15,17 @@ exports.isAuthenticated = (req, res, next) => {
 
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
-    const ipAddress = req.ip;
+    const clientIpAddress = req.ip;
     try {
-        const existingVote = await Voter.findOne({ pollId, ipAddress });
+        const existingVote = await Voter.findOne({ pollId, clientIpAddress });
         if (existingVote) {
             req.hasVoted = true;
             req.messages = "Thank You For Voting!";
+            req.ipAddress = clientIpAddress;
             next();
           } else {
             req.hasVoted = false;
+            req.ipAddress = clientIpAddress;
             next();
           }
         } catch (error) {

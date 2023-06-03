@@ -42,17 +42,18 @@ router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
 // INDIVIDUAL
 /* GET - Read individual Poll by ID */
 router.get('/:id', global.hasVoted, async function(req, res) {
+  const pollId = req.params.id;
     try {
-      const poll = await Poll.findById(req.params.id);
+      const poll = await Poll.findById(pollId);
       if (!poll) {
         res.status(404).send('Poll not found');
       } else {
         res.render('polls/index', { 
-        title: 'Poll',
-         poll: poll,
-         user: req.user,
-         hasVoted: req.hasVoted,
-         messages: req.messages
+          title: 'Poll',
+          poll: poll,
+          user: req.user,
+          hasVoted: req.hasVoted,
+          messages: req.messages,
         });
       }
     } catch (err) {

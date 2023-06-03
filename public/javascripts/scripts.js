@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const socket = io(); 
+    const socket = io();
 
     function comparePasswords() {
         let pw1 = document.getElementById('password').value;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(answer).textContent = answerCount;
     });
 
-    document.getElementById("vote-btn").onclick = function(e,req) {
+    document.getElementById("vote-btn").onclick = function(e) {
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         console.log(pollId + ' ' + vote);
