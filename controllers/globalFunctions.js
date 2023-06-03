@@ -13,6 +13,7 @@ exports.isAuthenticated = (req, res, next) => {
     }
 };
 
+// public function to check if user has voted
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
     const clientIpAddress = req.ip;
@@ -21,11 +22,9 @@ exports.hasVoted = async (req, res, next) => {
         if (existingVote) {
             req.hasVoted = true;
             req.messages = "Thank You For Voting!";
-            req.ipAddress = clientIpAddress;
             next();
           } else {
             req.hasVoted = false;
-            req.ipAddress = clientIpAddress;
             next();
           }
         } catch (error) {

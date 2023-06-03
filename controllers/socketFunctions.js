@@ -6,9 +6,9 @@ module.exports = io => {
 
     io.on('connection', (socket) => {
 
-        const address = socket.handshake.headers["x-forwarded-for"].split(",")[0];
-        console.log(address);
-
+        // Grab user ip
+        const ipAddress = socket.handshake.headers["x-forwarded-for"].split(",")[0];
+       
         // Initialize variables to store id of player socket client
         const userId = socket.id;
 
@@ -23,8 +23,7 @@ module.exports = io => {
         });
 
         // Handle poll votes
-        socket.on('pollVote', async (id,vote,ip) => {
-            console.log(id);
+        socket.on('pollVote', async (id,vote) => {
             try {
                 const updatedPoll = await Poll.findOneAndUpdate(
                     { _id: id },
