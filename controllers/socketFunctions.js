@@ -6,8 +6,8 @@ module.exports = io => {
 
     io.on('connection', (socket) => {
 
-        const ipAddress = socket.handshake.address;
-        console.log(ipAddress);
+        const address = socket.handshake.headers["x-forwarded-for"].split(",")[0];
+        console.log(address);
 
         // Initialize variables to store id of player socket client
         const userId = socket.id;
