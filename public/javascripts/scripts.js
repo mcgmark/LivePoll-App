@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // grab poll id
-    const pollId = document.getElementById("vote-btn").dataset.pollid;
+    const pollId = document.getElementById("vote-btn");
+    pollId ? pollId = pollId.dataset.pollid : false ;
     console.log(pollId);
 
     // Join socketIO room with pollId
