@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // grab poll id
-    const pollId = document.getElementById("vote-btn");
+    let pollId = document.getElementById("vote-btn");
     pollId ? pollId = pollId.dataset.pollid : false ;
     console.log(pollId);
 
