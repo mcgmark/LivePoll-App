@@ -14,14 +14,9 @@ exports.isAuthenticated = (req, res, next) => {
 
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
-    const ipAddressA = req.headers['x-forwarded-for'];
-    const ipAddressB = req.connection.remoteAddress;
-    const ipAddressC = req.ip;
+    const ipAddress = req.ip;
     try {
-        console.log("A " + ipAddressA);
-        console.log("b " + ipAddressB);
-        console.log("c" + ipAddressC);
-        const existingVote = await Voter.findOne({ pollId, ipAddressC });
+        const existingVote = await Voter.findOne({ pollId, ipAddress });
         if (existingVote) {
             req.hasVoted = true;
             req.messages = "Thank You For Voting!";

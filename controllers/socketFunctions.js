@@ -7,7 +7,7 @@ module.exports = io => {
     io.on('connection', (socket) => {
 
         // Grab user IP for vote tracking
-        const ipAddress = socket.handshake.address;
+        const ipAddress = socket.request.connection.remoteAddress;
 
         // Initialize variables to store id of player socket client
         const userId = socket.id;
