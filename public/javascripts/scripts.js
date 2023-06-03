@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // grab poll id
-    let pollId = document.getElementById("vote-btn");
-    pollId ? pollId = pollId.dataset.pollid : false ;
+    let pollIdButton = document.getElementById("vote-btn");
+    if (pollIdButton) {
+        let pollId = pollId.dataset.pollId;
+    }
     console.log(pollId);
 
     // Join socketIO room with pollId
@@ -36,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(answer).textContent = answerCount;
     });
 
-    document.getElementById("vote-btn").onclick = function(e) {
+    pollIdButton ? pollIdButton.onclick = function(e) {
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         console.log(pollId + ' ' + vote);
@@ -46,6 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
         for (let i = 0 ; i < radioButtons.length; i++) {
             radioButtons[i].style.display = "none";
         }
-    };
+    } : false;
 
 });
