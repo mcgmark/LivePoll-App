@@ -7,12 +7,7 @@
         <h1>Vote</h1>
     </div>
 </section>
-<section id="login-tab">
-    <div id="username-display">
-        <p>Poll By: {{user.username}}</p>
-        <p>Share this poll:</p>
-        <p>{{pollUrl}}</p>
-    </div>
+<section id="login-tab" class="poll-container">
     {{#if messages}}
         <p class="messages">{{messages}}</p>
     {{else}}
@@ -33,4 +28,8 @@
         {{#unless hasVoted}}<button id="vote-btn">vote</button>{{/unless}}
     </form>
 </section>
+    <aside id="username-display">
+      <p>poll by: {{user.username}}</p>
+      <p id="poll-url">{{pollUrl}}<i class="fa-solid fa-scissors" onclick="copyLink()"></i></p>
+    </aside>
 <!-- HOME CONTENT END -->

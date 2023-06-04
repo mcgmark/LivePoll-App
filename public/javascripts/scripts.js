@@ -1,22 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const socket = io();
 
-    function comparePasswords() {
-        let pw1 = document.getElementById('password').value;
-        let pw2 = document.getElementById('confirm').value;
-        let pwMessage = document.getElementById('pwMessage');
-
-        if (pw1 != pw2) {
-            pwMessage.innerText = "Passwords do not match";
-            pwMessage.className = "text-danger";
-            return false;
-        } else {
-            pwMessage.innerText = "";
-            pwMessage.className = "";
-            return true;
-        }
-    }
-
     // grab poll id and vote button
     const pollIdButton = document.getElementById("vote-btn");
     const pollId = document.getElementById("question-container").dataset.pollid;
@@ -49,3 +33,26 @@ document.addEventListener("DOMContentLoaded", function() {
     } : false;
 
 });
+
+function comparePasswords() {
+    let pw1 = document.getElementById('password').value;
+    let pw2 = document.getElementById('confirm').value;
+    let pwMessage = document.getElementById('pwMessage');
+
+    if (pw1 != pw2) {
+        pwMessage.innerText = "Passwords do not match";
+        pwMessage.className = "text-danger";
+        return false;
+    } else {
+        pwMessage.innerText = "";
+        pwMessage.className = "";
+        return true;
+    }
+}
+
+    // Function to copy poll link to clipboard
+function copyLink() {
+    const url = document.getElementById('poll-url').textContent;
+    navigator.clipboard.writeText(url)
+    alert("Link Copied");
+}

@@ -22,7 +22,6 @@ html {
 
 body {
   min-height: 100vh;
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: url('../images/header.png'), linear-gradient(180deg, #170823 37.5%, #170823 52.6%, #261632 83.33%);;
   background-repeat: no-repeat;
@@ -59,6 +58,7 @@ fieldset {
 
 
 main {
+position: relative;
 width: 560px;
 min-height: 530px;
 background: #FFFFFF;
@@ -111,7 +111,9 @@ section#page-top-container div:nth-of-type(2) {
 /* LOGIN PAGE */
 
 section#login-tab {
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
+  padding-bottom: 1rem;
+  position: relative;
 }
 
 p.messages {
@@ -135,7 +137,7 @@ p.error-message {
   color: #373737;
   background: #F4F4F4;
   padding: .75rem;
-  margin: 2rem auto 1rem auto;
+  margin: 1rem auto 1rem auto;
 }
 
 p.login{
@@ -215,7 +217,8 @@ table td {
 /* POLL page styles */
 .question {
   font-family: 'Cabin', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
+  line-height: 2.75rem;
 }
 
 
@@ -251,10 +254,31 @@ aside#poll-link {
 
 form {
   margin-top: 20px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
-div#username-display {
-  padding: 20px;
-  background-color: rgba(55, 55, 55, 0.07);
+aside#username-display {
+  font-family: 'Cabin';
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px 0px;
+  position: relative;
+  bottom: 0px;
+  letter-spacing: .1rem;
+  text-align: center;
+  border-top: 1px solid black;
 }
+
+aside#username-display p {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+aside#username-display i {
+  color: #00967f;
+  margin-left: 5px;
+  cursor: grab;
+}
+
+
+
