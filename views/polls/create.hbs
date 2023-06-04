@@ -18,6 +18,7 @@
 {{/if}}
 <form method="post">
   <fieldset>
+    <input type="hidden"  name="username" id="user" value="{{user.username}}">
     <textarea name="question" id="question" placeholder="QUESTION? (REQUIRED)"></textarea>
     <input type="text" name="answerOne" id="answerOne" placeholder="Option #1 (required)" required />
     <input type="text" name="answerTwo" id="answerTwo" placeholder="Option #2 (required)" required />

@@ -8,6 +8,11 @@
     </div>
 </section>
 <section id="login-tab">
+    <div id="username-display">
+        <p>Poll By: {{user.username}}</p>
+        <p>Share this poll:</p>
+        <p>{{pollUrl}}</p>
+    </div>
     {{#if messages}}
         <p class="messages">{{messages}}</p>
     {{else}}

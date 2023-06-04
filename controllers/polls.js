@@ -22,8 +22,8 @@ router.get('/create', global.isAuthenticated, (req, res) => {
 router.post('/create', global.isAuthenticated, async (req, res) => {  
     try {
       const newPoll = await Poll.create(req.body);
-      console.log(req.body);
-      res.redirect('/');
+      console.log(newPoll);
+      res.redirect(`/polls/${newPoll._id}`); // Redirect to the new poll page
     } catch (err) {
       res.status(500).json({ error: err.message });
     }   
@@ -43,6 +43,7 @@ router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
 /* GET - Read individual Poll by ID */
 router.get('/:id', global.hasVoted, async function(req, res) {
   const pollId = req.params.id;
+  const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
     try {
       const poll = await Poll.findById(pollId);
       if (!poll) {
@@ -54,6 +55,7 @@ router.get('/:id', global.hasVoted, async function(req, res) {
           user: req.user,
           hasVoted: req.hasVoted,
           messages: req.messages,
+          pollUrl: fullUrl
         });
       }
     } catch (err) {

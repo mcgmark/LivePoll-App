@@ -8,6 +8,9 @@ const pollSchema = new mongoose.Schema({
         required: 'Question is required'
         
     },
+    username: {
+        type: String
+    },
     answerOne: {
         type: String,
         required: 'Atleast 2 poll options are required'
