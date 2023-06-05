@@ -288,23 +288,28 @@ aside#username-display p {
 }
 
 aside#username-display i {
+  font-size: .75rem;
   color: #00967f;
   margin-left: 5px;
   cursor: grab;
+  background-color: #F4F4F4;
+  padding: 4px;
+  border-radius: 5px;
 }
 
 aside#username-display i:hover {
-  color: #fff;
+  color: #235d55;
 }
 
 aside#username-display i::after {
- content: 'COPY';
+ content: 'SHARE LINK';
+ letter-spacing: .05rem;
 }
 
 
 /* Radio Input Styles */
 
-.custom-radio {
+.poll-option {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -316,14 +321,14 @@ aside#username-display i::after {
 }
 
 /* Hide the default radio button */
-.custom-radio input[type="radio"] {
+.poll-option input[type="radio"] {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
 /* Create the custom radio button */
-.custom-radio label {
+.poll-option label {
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -334,7 +339,7 @@ aside#username-display i::after {
 }
 
 /* Style the inner circle */
-.custom-radio label::after {
+.poll-option label::after {
   content: "";
   width: 0px;
   height: 0px;
@@ -349,7 +354,7 @@ aside#username-display i::after {
 }
 
 /* Show the inner circle when the radio button is checked */
-.custom-radio input[type="radio"]:checked + label::after {
+.poll-option input[type="radio"]:checked + label::after {
   opacity: 1;
   width: 22px;
   height: 22px;

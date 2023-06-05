@@ -18,10 +18,16 @@ document.addEventListener("DOMContentLoaded", function() {
     socket.on('update-poll-results', (vote, voteCount, totalVotes) => {
         const percentage = (voteCount / totalVotes) * 100;
         const percentageBar = document.querySelector(`.percentage-bar.${vote}`);
-        console.log(percentage);
         document.getElementById(vote).textContent = voteCount;
         percentageBar.style.width = `${percentage}%`;
-        console.log(percentageBar.style.width);
+        const pollOptions = document.getElementsByClassName('poll-option');
+        for (var i=0; i < pollOptions.length; i++){
+            var pollOption = pollOptions[i];
+            var pollOptionValue = pollOption.querySelector('.vote-count').textContent;
+            var pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');
+            var newPercentageValue = (pollOptionValue / totalVotes) * 100;
+            pollOptionPercentageBar.style.width = `${newPercentageValue}%`;
+        }
     });
 
     // Handle vote success
@@ -58,8 +64,7 @@ function comparePasswords() {
 }
 
     // Function to copy poll link to clipboard
-function copyLink() {
-    const urlContainer = document.getElementById('poll-url');
-    let url = urlContainer.textContent
+function copyLink(url) {
+    console.log(url);
     navigator.clipboard.writeText(url);
 }
