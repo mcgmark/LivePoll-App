@@ -123,7 +123,7 @@ p.messages {
   color: #373737;
   background: #b8ff99;
   padding: .75rem;
-  margin: 1rem auto 1rem auto;
+  margin: .25rem auto 1rem auto;
 }
 
 p.error-message {
@@ -135,7 +135,7 @@ p.error-message {
   color: #373737;
   background: #F4F4F4;
   padding: .75rem;
-  margin: 1rem auto 1rem auto;
+  margin: .25rem auto 1rem auto;
 }
 
 p.login{
@@ -378,4 +378,14 @@ span.answer-label {
   z-index: 10;
   display: flex;
   align-items: center;
+}
+
+
+table td {
+  padding: 15px 0px;
+  padding-right: 10px;
+}
+
+.list {
+  margin-bottom: 3rem;
 }

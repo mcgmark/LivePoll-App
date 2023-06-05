@@ -23,7 +23,7 @@
             <div class="custom-radio answerOneCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
-                        <input type="radio" name="vote" id="answerOne" value="answerOneCount" checked="checked" required />
+                        <input type="radio" name="vote" id="answerOne" value="answerOneCount" required />
                         <label for="answerOne"></label>
                     {{/unless}}
                     <span class="answer-label">{{poll.answerOne}}</span><span id="answerOneCount" class="vote-count">{{poll.answerOneCount}}</span>
