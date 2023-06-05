@@ -9,7 +9,8 @@ const pollSchema = new mongoose.Schema({
         
     },
     username: {
-        type: String
+        type: String,
+        default: 'Admin'
     },
     answerOne: {
         type: String,
@@ -38,6 +39,10 @@ const pollSchema = new mongoose.Schema({
         default: 0
     },
     answerFourCount: {
+        type: Number,
+        default: 0
+    },
+    totalVotes: {
         type: Number,
         default: 0
     }

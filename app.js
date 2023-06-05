@@ -3,6 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const hbs = require("hbs");
+
 
 const index = require('./controllers/index');
 const users = require('./controllers/users');
@@ -14,6 +16,13 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// Helper to convert vote count to percentage
+hbs.registerHelper('percent', function (votes, totalVotes) {
+  const percentage = (votes / totalVotes) * 100;
+  return `${percentage.toFixed(2)}%`;
+});
+
+console.log('percentage helper registered');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,6 +35,7 @@ app.enable('trust proxy');
 app.use(express.static(path.join(__dirname, 'public/')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use('/fontawesome', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')));
+
 
 // Use dotenv to read .env file for user environment variables (aka secrets)
 if(process.env.NODE_ENV != 'production'){
@@ -82,6 +92,7 @@ passport.use(new googleStrategy({
 }));
 
 // passport end
+
 
 // ROUTES
 

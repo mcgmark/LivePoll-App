@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>LivePoll - Poll</title>
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://kit.fontawesome.com/a77035a0c0.js" crossorigin="anonymous"></script>
@@ -31,7 +31,11 @@
   <!-- HEADER END -->
   <!-- MAIN START -->
   <main>
-    {{{body}}} 
+    {{{body}}}
+    {{#unless poll}}
+    <aside id="username-display-b">
+    </aside>
+    {{/unless}}
   </main>
   <!-- MAIN END -->
   <script src="/javascripts/scripts.js" defer></script>

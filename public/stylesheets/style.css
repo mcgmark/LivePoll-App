@@ -23,7 +23,7 @@ html {
 body {
   min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url('../images/header.png'), linear-gradient(180deg, #170823 37.5%, #170823 52.6%, #261632 83.33%);;
+  background: url('../images/header.png'), linear-gradient(180deg, #1e0c2d 37.5%, #1d042e 52.6%, #291335 83.33%);
   background-repeat: no-repeat;
   background-size: 100% auto;
 
@@ -35,7 +35,7 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #401D51;
 }
 
 h1, h2, h3, p {
@@ -55,14 +55,12 @@ fieldset {
   justify-content: center;
 }
 
-
-
 main {
 position: relative;
-width: 560px;
+width: 580px;
 min-height: 530px;
 background: #FFFFFF;
-box-shadow: 0px 4px 50px #000000;
+box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.414);
 border-radius: 0px 0px 40px 40px;
 transition: all 500ms;
 }
@@ -221,21 +219,21 @@ table td {
   line-height: 2.75rem;
 }
 
-
-fieldset.poll-answers div label {
-  display: inline-block;
-  font-family: 'Cabin', sans-serif;
-  font-size: 1.5rem;
-}
-
 fieldset.poll-answers div input[type="radio"] {
   display: inline-block;
   font-size: 3rem;
   margin-right: 1rem;
 }
 
+fieldset.poll-answers {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
 fieldset.poll-answers div {
-  margin-top: 1.5rem;
+  /* box-sizing: border-box;
+  margin-top: 1.5rem; */
 }
 
 span.vote-count {
@@ -245,6 +243,7 @@ span.vote-count {
   padding: .25rem .5rem;
   background-color: var(--purple);
   margin-left: 1rem;
+  border-radius: 20px;
 }
 
 aside#poll-link {
@@ -258,20 +257,30 @@ form {
 }
 
 aside#username-display {
+  color: #fff;
   font-family: 'Cabin';
   box-sizing: border-box;
   width: 100%;
   padding: 15px 0px;
   position: relative;
   bottom: 0px;
-  letter-spacing: .1rem;
   text-align: center;
-  border-top: 1px solid black;
+  background-color: #401D51;
+  border-radius: 0px 0px 35px 35px;
+}
+
+aside#username-display-b {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 15px 0px;
+  position: absolute;
+  bottom: 0px;
+  background-color: #401D51;
+  border-radius: 0px 0px 35px 35px;
 }
 
 aside#username-display p {
-  font-size: 10px;
-  font-weight: bold;
+  font-size: 13px;
 }
 
 aside#username-display i {
@@ -281,4 +290,80 @@ aside#username-display i {
 }
 
 
+/* Radio Input Styles */
 
+.custom-radio {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  padding: 10px;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #F4F4F4;
+}
+
+/* Hide the default radio button */
+.custom-radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Create the custom radio button */
+.custom-radio label {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #401D51;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Style the inner circle */
+.custom-radio label::after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background-color: #401D51;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+/* Show the inner circle when the radio button is checked */
+.custom-radio input[type="radio"]:checked + label::after {
+  opacity: 1;
+  width: 22px;
+  height: 22px;
+}
+
+span.answer-label {
+  display: inline-block;
+  font-family: 'Cabin', sans-serif;
+  font-size: 1.5rem;
+  margin-left: 10px;
+}
+
+
+.percentage-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #05ff264f;
+  height: 100%;
+  width: 0; /* The initial width is set to 0 */
+  transition: width 0.3s ease; /* Add a transition effect for smooth width changes */
+  z-index: 1;
+}
+
+.poll-option-container {
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}

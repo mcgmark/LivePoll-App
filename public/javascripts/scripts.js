@@ -15,21 +15,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Handle update votes
-    socket.on('update-poll-results', (answer, answerCount) => {
-        // Update the corresponding <span> element with the new vote count
-        document.getElementById(answer).textContent = answerCount;
+    socket.on('update-poll-results', (vote, voteCount, totalVotes) => {
+        const percentage = (voteCount / totalVotes) * 100;
+        const percentageBar = document.querySelector(`.percentage-bar.${vote}`);
+        console.log(percentage);
+        document.getElementById(vote).textContent = voteCount;
+        percentageBar.style.width = `${percentage}%`;
+        console.log(percentageBar.style.width);
+    });
+
+    // Handle vote success
+    socket.on('vote-success', () => {
+        document.querySelector('button').style.display = 'none';
+        const radioButtons = document.querySelectorAll('label')
+        for (let i = 0 ; i < radioButtons.length; i++) {
+            radioButtons[i].style.display = "none";
+        }
     });
 
     pollIdButton ? pollIdButton.onclick = function(e) {
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
-        console.log(pollId + ' ' + vote);
         socket.emit('pollVote', pollId, vote);
-        document.querySelector('button').style.display = 'none';
-        const radioButtons = document.querySelectorAll('input[type=radio]')
-        for (let i = 0 ; i < radioButtons.length; i++) {
-            radioButtons[i].style.display = "none";
-        }
     } : false;
 
 });
@@ -52,7 +59,7 @@ function comparePasswords() {
 
     // Function to copy poll link to clipboard
 function copyLink() {
-    const url = document.getElementById('poll-url').textContent;
-    navigator.clipboard.writeText(url)
-    alert("Link Copied");
+    const urlContainer = document.getElementById('poll-url');
+    let url = urlContainer.textContent
+    navigator.clipboard.writeText(url);
 }

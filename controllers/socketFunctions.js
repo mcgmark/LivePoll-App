@@ -27,12 +27,14 @@ module.exports = io => {
             try {
                 const updatedPoll = await Poll.findOneAndUpdate(
                     { _id: id },
-                    { $inc: { [vote]: 1 } },
+                    { $inc: { [vote]: 1, totalVotes: 1 } },
                     { new: true } // To return the updated document
                 );
-                const voteCount = updatedPoll[vote];     
-                io.to(id).emit('update-poll-results', vote, voteCount);
+                const voteCount = updatedPoll[vote];
+                const totalVotes = updatedPoll['totalVotes'];      
+                io.to(id).emit('update-poll-results', vote, voteCount, totalVotes);
                 const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress });
+                io.to(userId).emit('vote-success');
                 console.log('vote success');
             } catch (err) {
                 console.log('vote error');
