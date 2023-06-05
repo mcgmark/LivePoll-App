@@ -355,7 +355,7 @@ span.answer-label {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #05ff264f;
+  background-color: #b8ff99;
   height: 100%;
   width: 0; /* The initial width is set to 0 */
   transition: width 0.3s ease; /* Add a transition effect for smooth width changes */
