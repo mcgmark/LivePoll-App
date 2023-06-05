@@ -123,7 +123,7 @@ p.messages {
   color: #373737;
   background: #b8ff99;
   padding: .75rem;
-  margin: 2rem auto 1rem auto;
+  margin: 1rem auto 1rem auto;
 }
 
 p.error-message {
@@ -260,11 +260,10 @@ aside#username-display {
   color: #fff;
   font-family: 'Cabin';
   box-sizing: border-box;
-  width: 100%;
-  padding: 15px 0px;
+  padding: 25px 0px;
   position: relative;
   bottom: 0px;
-  text-align: center;
+  text-align: left;
   background-color: #401D51;
   border-radius: 0px 0px 35px 35px;
 }
@@ -280,13 +279,26 @@ aside#username-display-b {
 }
 
 aside#username-display p {
-  font-size: 13px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 15px;
+  word-break: break-all;
+  padding: 5px 0px;
 }
 
 aside#username-display i {
   color: #00967f;
   margin-left: 5px;
   cursor: grab;
+}
+
+aside#username-display i:hover {
+  color: #fff;
+}
+
+aside#username-display i::after {
+ content: 'COPY';
 }
 
 
