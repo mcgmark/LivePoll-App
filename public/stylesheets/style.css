@@ -155,7 +155,7 @@ header nav input{
 
 #menuToggle input:checked ~ label span {
   opacity: 1;
-  transform: rotate(45deg) translate(0px, 1px);
+  transform: rotate(45deg) translate(-1px, -1px);
   background: var(--purple);
 }
 
@@ -243,10 +243,25 @@ section#page-top-container div:nth-of-type(2) {
 /* LOGIN PAGE */
 
 section#login-tab {
-  padding: 2rem 3rem;
+  padding: 1rem 1rem;
   padding-bottom: 1rem;
   position: relative;
 }
+
+section#login-tab.create {
+  min-width: 100%;
+}
+
+@media screen and (min-width: 600px) {
+  section#login-tab {
+    padding: 1rem 3rem;
+  }
+  #login-tab.create {
+    min-width: 580px;
+  }
+}
+
+
 
 p.messages {
   font-family: 'Oswald';
