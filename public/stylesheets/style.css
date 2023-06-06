@@ -155,7 +155,7 @@ header nav input{
 
 #menuToggle input:checked ~ label span {
   opacity: 1;
-  transform: rotate(45deg) translate(0px, 0px);
+  transform: rotate(45deg) translate(0px, 1px);
   background: var(--purple);
 }
 
