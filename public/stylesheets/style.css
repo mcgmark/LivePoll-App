@@ -257,7 +257,7 @@ section#login-tab.create {
     padding: 1rem 3rem;
     min-width: 580px;
   }
-  #login-tab.create {
+  .create {
     min-width: 580px;
   }
 }
