@@ -255,6 +255,7 @@ section#login-tab.create {
 @media screen and (min-width: 600px) {
   section#login-tab {
     padding: 1rem 3rem;
+    min-width: 580px;
   }
   #login-tab.create {
     min-width: 580px;
