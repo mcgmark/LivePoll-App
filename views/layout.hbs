@@ -13,31 +13,45 @@
     
 </head>
 <body>
-  <nav>
-    {{#if user}}
-      <a href="#">{{user.username}}</a>
-      <a href="/users/logout">Logout</a>
-    {{else}}
-      <a href="/users/register">Register</a>
-      <a href="/users/login">Login</a>
-    {{/if}}      
-  </nav>
   <!-- HEADER START -->
   <header>
     <section>
-      <a href="/"><img src="/images/livepoll-logo.svg" alt="Livepoll logo" /></a>
+      <a href="/"><img src="/images/livepoll-logo.svg" alt="Livepoll logo"></a>
     </section>
+    <nav>
+      <!-- add our mobile menu -->
+      <div id="menuToggle">
+        <input type="checkbox" id="toggle" />
+        <label for="toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <section id="menu">
+          {{#if user}}
+            <a href="#">{{user.username}}</a>
+            <a href="/users/logout">Logout</a>
+          {{else}}
+            <a href="/users/register">Register</a>
+            <a href="/users/login">Login</a>
+          {{/if}}
+        </section> 
+      </div>    
+    </nav>
   </header>
   <!-- HEADER END -->
   <!-- MAIN START -->
   <main>
-    {{{body}}}
-    {{#unless poll}}
-    <aside id="username-display-b">
-    </aside>
-    {{/unless}}
+    <section id="main-inner">
+      {{{body}}}
+    </section>
   </main>
   <!-- MAIN END -->
+  <footer>
+    <p>
+      LivePoll &copy; Mark McGuigan 2023
+    </p>
+  </footer>
   <script src="/javascripts/scripts.js" defer></script>
 </body>
 </html>

@@ -70,7 +70,7 @@
 </section>
     <aside id="username-display">
         {{#if poll}}
-      <p>Posted By: {{user.username}}</p>
+      <p>Posted By: {{poll.username}}</p>
       <p id="poll-url">Poll ID: {{poll._id}} <i class="fa-solid fa-scissors" onclick="copyLink('{{pollUrl}}')"></i></p>
         {{/if}}
     </aside>

@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Handle vote success
     socket.on('vote-success', () => {
         document.querySelector('button').style.display = 'none';
-        const radioButtons = document.querySelectorAll('label')
+        const radioButtons = document.querySelectorAll('.poll-answers label')
         for (let i = 0 ; i < radioButtons.length; i++) {
             radioButtons[i].style.display = "none";
         }
@@ -65,6 +65,5 @@ function comparePasswords() {
 
     // Function to copy poll link to clipboard
 function copyLink(url) {
-    console.log(url);
     navigator.clipboard.writeText(url);
 }
