@@ -166,7 +166,6 @@ header img {
 #menuToggle input:checked ~ label span {
   opacity: 1;
   transform: rotate(45deg) translate(-1px, -1px);
-  background: var(--purple);
 }
 
 #menuToggle input:checked ~ label span:nth-of-type(2) {
@@ -181,7 +180,7 @@ header img {
 #menu {
   flex-direction: column;
   position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
   width: 100%;
   height: 100vh;
@@ -191,6 +190,7 @@ header img {
   transform: translateX(100%);
   transition: transform 0.5s linear;
   z-index: 50;
+  box-shadow: inset 0px 30px 20px -10px #4607592e;
 }
 
 #menuToggle input:checked ~ #menu {
