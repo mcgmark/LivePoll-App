@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Cabin&family=Oswald&display=swap');
 
 :root {
-  --purple: #401d51;
+  --purple: #541075;
 }
 
 *, *:before, *:after {
@@ -23,7 +23,7 @@ html {
 body {
   min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url('../images/header.png'), linear-gradient(180deg, #1e0c2d 37.5%, #1d042e 52.6%, #291335 83.33%);
+  background: url('../images/header.png'), linear-gradient(180deg, #2f0050 37.5%, #2d0141 100%);
   background-repeat: no-repeat;
   background-size: 100% auto;
 
@@ -62,7 +62,7 @@ header {
   margin-bottom: 15px;
   width: 100%;
   height: 100px;
-  background-color: var(--purple);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.216);
 }
 
 header > section {
@@ -82,12 +82,13 @@ main {
   background: #FFFFFF;
   margin-right: auto;
   margin-left: auto;
+  border: 3px solid #b7b7b7;
 }
 
 @media screen and (min-width: 600px) {
   #main-inner {
-    min-width: 380px;
-    max-width: 580px;
+    min-width: 590px;
+    max-width: 560px;
     border-radius: 0px 0px 40px 40px;
     box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.414);
   }
@@ -253,7 +254,6 @@ section#page-top-container div:nth-of-type(2) {
 
 section#tab {
   padding: 1rem 1rem;
-  padding-bottom: 1rem;
   position: relative;
 }
 
@@ -263,11 +263,8 @@ section#tab-create {
 
 @media screen and (min-width: 600px) {
   section#tab {
-    padding: 1rem 3rem;
-    min-width: 580px;
-  }
-  section#tab-create {
-    min-width: 580px;
+    padding-left: 4rem;
+    padding-right: 4rem;
   }
 }
 
@@ -365,12 +362,13 @@ section#tab button, section#home-list button {
   border: none;
   font-family: 'Bayon';
   font-size: 1.5rem;
-  padding: .25rem;
+  padding: 1rem .25rem;
   margin-top: 3rem;
   background-color: var(--purple);
   text-transform: uppercase;
   color: #fff;
   margin-bottom: 1rem;
+  border-radius: 23px;
 }
 
 /* HOME page styles */
@@ -393,6 +391,12 @@ table td {
 }
 
 /* POLL page styles */
+
+form {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
 .question {
   font-family: 'Cabin', sans-serif;
   font-size: 1.75rem;
@@ -426,15 +430,9 @@ aside#poll-link {
   background-color: rgba(55, 55, 55, 0.07);
 }
 
-form {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
 aside#username-display {
   color: #fff;
   font-family: 'Cabin';
-  box-sizing: border-box;
   padding: 25px 0px;
   position: relative;
   bottom: 0px;
@@ -443,7 +441,6 @@ aside#username-display {
 }
 
 aside#username-display-b {
-  box-sizing: border-box;
   width: 100%;
   padding: 15px 0px;
   position: absolute;
@@ -453,11 +450,11 @@ aside#username-display-b {
 
 @media screen and (min-width: 600px){
   aside#username-display {
-    border-radius: 0px 0px 35px 35px;
+    border-radius: 0px 0px 40px 40px;
   }
   
   aside#username-display-b {
-    border-radius: 0px 0px 35px 35px;
+    border-radius: 0px 0px 40px 40px;
   }
 }
 
@@ -582,16 +579,15 @@ table td {
 footer {
   height: 40px;
   width: 100%;
-  background-color:var(--purple);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.216);
 }
 
 footer p {
-  box-sizing: border-box;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.216);
   font-size: .8rem;
  text-align: center;
 }
