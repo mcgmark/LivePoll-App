@@ -30,9 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+
     // Handle vote success
     socket.on('vote-success', () => {
         document.querySelector('button').style.display = 'none';
+        document.querySelector('#heading h1').textContent = 'RESULTS';
+        document.querySelector('p.messages').textContent = 'Success! Your vote has been counted!';
+        document.querySelector('p.messages').classList.add('messages-voted');
         const radioButtons = document.querySelectorAll('.poll-answers label')
         for (let i = 0 ; i < radioButtons.length; i++) {
             radioButtons[i].style.display = "none";
@@ -66,4 +70,53 @@ function comparePasswords() {
     // Function to copy poll link to clipboard
 function copyLink(url) {
     navigator.clipboard.writeText(url);
+}
+
+
+
+var element = document.getElementById('main-inner');
+
+element.style.transform = 'translateY(-25px)';
+
+var animation = element.animate([
+{ transform: 'translateY(-10px)' },
+{ transform: 'translateY(0)' }
+], { 
+duration: 1000,
+fill: "forwards",
+easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
+});
+
+animation.onfinish = function() {
+element.style.transform = 'translateY(0)';
+};
+
+
+
+const pollOptionElements = document.querySelectorAll('div.poll-option');
+for (var i=0; i < pollOptionElements.length; i++){
+    var pollOption = pollOptionElements[i];
+    var animation = pollOption.animate([
+        { transform: 'translateY(-10px)' },
+        { transform: 'translateY(0)' }
+        ], { 
+        duration: 500 * (i + 1),
+        fill: "forwards",
+        easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
+    });
+
+    animation.onfinish = function() {
+        element.style.transform = 'translateY(0)';
+        };
+
+    var pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');
+    var percentageBarValue = pollOptionPercentageBar.style.width;
+    var animationBars = pollOptionPercentageBar.animate([
+        { width: '0%', },
+        { width: `${percentageBarValue}`}
+        ], { 
+        duration: 1000 * (i + 1),
+        fill: "forwards",
+        easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
+    });
 }

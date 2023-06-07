@@ -272,20 +272,7 @@ section#tab-create {
 }
 
 
-
 p.messages {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
-  text-transform: uppercase;
-  color: #373737;
-  background: #b8ff99;
-  padding: .75rem;
-  margin: .25rem auto 1rem auto;
-}
-
-p.error-message {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 400;
@@ -297,11 +284,25 @@ p.error-message {
   margin: .25rem auto 1rem auto;
 }
 
+p.messages-voted {
+  background: #b8ff99;
+  animation: fade 5500ms forwards;
+}
+
+@keyframes fade {
+  0% {
+    background: #b8ff99;
+  }
+  100% {
+    background: #F4F4F4;
+  }
+}
+
 p.login{
   text-transform: none;
 }
 
-p.error-message-bad {
+p.messages-error {
   font-family: 'Oswald';
   font-style: normal;
   font-weight: 400;
@@ -407,7 +408,7 @@ aside#poll-link {
 
 form {
   margin-top: 20px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 aside#username-display {

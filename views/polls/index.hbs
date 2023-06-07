@@ -3,7 +3,7 @@
     <div>
        <i class="fa-solid fa-hand-fist"></i>
     </div>
-    <div>
+    <div id="heading">
         {{#if hasVoted}}
         <h1>Results</h1>
         {{else}}
@@ -12,10 +12,10 @@
     </div>
 </section>
 <section id="tab" class="poll-container">
-    {{#if messages}}
-        <p class="messages">{{messages}}</p>
+    {{#if messages-error}}
+        <p class="messages-error">{{messages}}</p>
     {{else}}
-        <p class="error-message">this is your opportunity submit your vote</p>
+        <p class="messages">this is your opportunity submit your vote</p>
     {{/if}}
     <p class="question" id="question-container" data-pollid="{{poll._id}}">{{poll.question}}</p>
     <form>
