@@ -298,6 +298,17 @@ p.messages-voted {
   margin: .25rem auto 1rem auto;
 }
 
+p.messages-login {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #373737;
+  background: #F4F4F4;
+  padding: .75rem;
+  margin: .25rem auto 1rem auto;
+}
+
 @keyframes fade {
   0% {
     background: #b8ff99;
@@ -548,7 +559,7 @@ span.answer-label {
   background-color: #b8ff99;
   height: 100%;
   width: 0; /* The initial width is set to 0 */
-  transition: width 0.3s ease; /* Add a transition effect for smooth width changes */
+  transition: all 500ms ease; /* Add a transition effect for smooth width changes */
   z-index: 1;
 }
 

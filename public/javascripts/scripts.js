@@ -72,10 +72,11 @@ function copyLink(url) {
     navigator.clipboard.writeText(url);
 }
 
+// Page UI Animations
 
+// Main
 
 var element = document.getElementById('main-inner');
-
 element.style.transform = 'translateY(-25px)';
 
 var animation = element.animate([
@@ -92,8 +93,10 @@ element.style.transform = 'translateY(0)';
 };
 
 
+// Poll Options
 
 const pollOptionElements = document.querySelectorAll('div.poll-option');
+
 for (var i=0; i < pollOptionElements.length; i++){
     var pollOption = pollOptionElements[i];
     var animation = pollOption.animate([
@@ -101,13 +104,8 @@ for (var i=0; i < pollOptionElements.length; i++){
         { transform: 'translateY(0)' }
         ], { 
         duration: 500 * (i + 1),
-        fill: "forwards",
         easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
     });
-
-    animation.onfinish = function() {
-        element.style.transform = 'translateY(0)';
-        };
 
     var pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');
     var percentageBarValue = pollOptionPercentageBar.style.width;
@@ -116,7 +114,6 @@ for (var i=0; i < pollOptionElements.length; i++){
         { width: `${percentageBarValue}`}
         ], { 
         duration: 1000 * (i + 1),
-        fill: "forwards",
         easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
     });
-}
+};
