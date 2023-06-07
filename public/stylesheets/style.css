@@ -287,6 +287,15 @@ p.messages {
 p.messages-voted {
   background: #b8ff99;
   animation: fade 5500ms forwards;
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  text-transform: uppercase;
+  color: #373737;
+  background: #F4F4F4;
+  padding: .75rem;
+  margin: .25rem auto 1rem auto;
 }
 
 @keyframes fade {
