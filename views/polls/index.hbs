@@ -12,8 +12,8 @@
     </div>
 </section>
 <section id="tab" class="poll-container">
-    {{#if messages-error}}
-        <p class="messages-error">{{messages}}</p>
+    {{#if hasVoted}}
+        <p class="messsages messages-voted">Your vote has already been counted!</p>
     {{else}}
         <p class="messages">this is your opportunity submit your vote</p>
     {{/if}}
