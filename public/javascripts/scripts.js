@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(vote).textContent = voteCount;
         percentageBar.style.width = `${percentage}%`;
         const pollOptions = document.getElementsByClassName('poll-option');
+        document.querySelector('#vote-total').textContent = `Votes: ${totalVotes}`;
         for (var i=0; i < pollOptions.length; i++){
             var pollOption = pollOptions[i];
             var pollOptionValue = pollOption.querySelector('.vote-count').textContent;
@@ -70,6 +71,7 @@ function comparePasswords() {
     // Function to copy poll link to clipboard
 function copyLink(url) {
     navigator.clipboard.writeText(url);
+    document.getElementById('poll-url').textContent = 'POLL LINK COPIED!';
 }
 
 // Page UI Animations

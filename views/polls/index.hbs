@@ -70,8 +70,11 @@
 </section>
     <aside id="username-display">
         {{#if poll}}
-      <p>Posted By: {{poll.username}}</p>
-      <p id="poll-url">Poll ID: {{poll._id}} <i class="fa-solid fa-scissors" onclick="copyLink('{{pollUrl}}')"></i></p>
+            <div id="username-display-inner">
+                <p id="vote-total">Votes: {{poll.totalVotes}}</p>
+                <p>Posted By: {{poll.username}}</p>
+                <p id="poll-url" onclick="copyLink('{{pollUrl}}')">TAP HERE TO COPY LINK CLIPBOARD</p>
+            </div>
         {{/if}}
     </aside>
 <!-- HOME CONTENT END -->
