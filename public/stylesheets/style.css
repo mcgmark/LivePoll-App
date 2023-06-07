@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Cabin&family=Oswald&display=swap');
 
 :root {
-  --purple: #541075;
+  --purple: #430c60;
 }
 
 *, *:before, *:after {
@@ -263,8 +263,8 @@ section#tab-create {
 
 @media screen and (min-width: 600px) {
   section#tab {
-    padding-left: 4rem;
-    padding-right: 4rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
