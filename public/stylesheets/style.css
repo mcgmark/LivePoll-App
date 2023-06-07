@@ -62,7 +62,6 @@ header {
   margin-bottom: 15px;
   width: 100%;
   height: 100px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.216);
 }
 
 header > section {
@@ -605,7 +604,6 @@ footer {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.216);
 }
 
 footer p {
