@@ -34,10 +34,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle vote success
     socket.on('vote-success', () => {
-        document.querySelector('button').style.display = 'none';
-        document.querySelector('#heading h1').textContent = 'RESULTS';
-        document.querySelector('p.messages').textContent = 'Success! Your vote has been counted!';
-        document.querySelector('p.messages').classList.add('messages-voted');
+        document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
+        document.querySelector('button').setAttribute('disabled', '');
         const radioButtons = document.querySelectorAll('.poll-answers label')
         for (let i = 0 ; i < radioButtons.length; i++) {
             radioButtons[i].style.display = "none";
@@ -97,7 +95,7 @@ element.style.transform = 'translateY(0)';
 
 // Poll Options
 
-const pollOptionElements = document.querySelectorAll('div.poll-option');
+const pollOptionElements = document.querySelectorAll('.poll-animate');
 
 for (var i=0; i < pollOptionElements.length; i++){
     var pollOption = pollOptionElements[i];
@@ -110,12 +108,13 @@ for (var i=0; i < pollOptionElements.length; i++){
     });
 
     var pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');
-    var percentageBarValue = pollOptionPercentageBar.style.width;
-    var animationBars = pollOptionPercentageBar.animate([
+    pollOptionPercentageBar ? percentageBarValue = pollOptionPercentageBar.style.width : false;
+    pollOptionPercentageBar ? animationBars = pollOptionPercentageBar.animate([
         { width: '0%', },
         { width: `${percentageBarValue}`}
         ], { 
         duration: 1000 * (i + 1),
         easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
-    });
+    }) : false;
 };
+

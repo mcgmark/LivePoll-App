@@ -33,7 +33,7 @@ module.exports = io => {
                 const voteCount = updatedPoll[vote];
                 const totalVotes = updatedPoll['totalVotes'];      
                 io.to(id).emit('update-poll-results', vote, voteCount, totalVotes);
-                const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress });
+                const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress, vote: vote });
                 io.to(userId).emit('vote-success');
                 console.log('vote success');
             } catch (err) {

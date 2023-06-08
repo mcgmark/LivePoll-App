@@ -1,26 +1,9 @@
 <!-- HOME CONTENT START -->
-<section id="page-top-container">
-    <div>
-       <i class="fa-solid fa-hand-fist"></i>
-    </div>
-    <div id="heading">
-        {{#if hasVoted}}
-        <h1>Results</h1>
-        {{else}}
-        <h1>Vote</h1>
-        {{/if}}
-    </div>
-</section>
 <section id="tab" class="poll-container">
-    {{#if hasVoted}}
-        <p class="messsages messages-voted">Your vote has already been counted!</p>
-    {{else}}
-        <p class="messages">this is your opportunity submit your vote</p>
-    {{/if}}
     <p class="question" id="question-container" data-pollid="{{poll._id}}">{{poll.question}}</p>
     <form>
         <fieldset class="poll-answers">
-            <div class="poll-option answerOneCount">
+            <div class="poll-option poll-animate answerOneCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
                         <input type="radio" name="vote" id="answerOne" value="answerOneCount" required />
@@ -30,7 +13,7 @@
                 </div>
                 <div class="percentage-bar answerOneCount" style="width:{{percent poll.answerOneCount poll.totalVotes}}"></div>
             </div>
-            <div class="poll-option answerTwoCount">
+            <div class="poll-option poll-animate answerTwoCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
                         <input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required />
@@ -41,7 +24,7 @@
                 <div class="percentage-bar answerTwoCount" style="width:{{percent poll.answerTwoCount poll.totalVotes}}"></div>
             </div>
             {{#if poll.answerThree}}
-            <div class="poll-option answerThreeCount">
+            <div class="poll-option poll-animate answerThreeCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
                         <input type="radio" name="vote" id="answerThree" value="answerThreeCount" required />
@@ -53,7 +36,7 @@
             </div>
             {{/if}}
             {{#if poll.answerFour}}
-            <div class="poll-option answerFourCount">
+            <div class="poll-option poll-animate answerFourCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
                         <input type="radio" name="vote" id="answerFour" value="answerFourCount" required />
@@ -65,15 +48,17 @@
             </div>
             {{/if}}
         </fieldset>
-        {{#unless hasVoted}}<button id="vote-btn">vote</button>{{/unless}}
+        {{#unless hasVoted}}<button id="vote-btn">tap here to vote</button>{{/unless}}
     </form>
 </section>
     <aside id="username-display">
         {{#if poll}}
             <div id="username-display-inner">
-                <p id="vote-total">Votes: {{poll.totalVotes}}</p>
-                <p>Posted By: {{poll.username}}</p>
-                <p id="poll-url" onclick="copyLink('{{pollUrl}}')">TAP HERE TO COPY LINK CLIPBOARD</p>
+                <div id="poll-info">
+                    <p id="vote-total">Votes: {{poll.totalVotes}}</p>
+                    <p id="vote-total">Posted By: {{poll.username}}</p>
+                </div>
+                <p id="poll-url" onclick="copyLink('{{pollUrl}}')">TAP HERE TO COPY LINK TO CLIPBOARD</p>
             </div>
         {{/if}}
     </aside>

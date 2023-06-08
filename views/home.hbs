@@ -1,35 +1,21 @@
 <!-- HOME CONTENT START -->
-<section id="page-top-container">
-    <div>
-       <i class="fa-solid fa-thumbs-up"></i> 
-    </div>
-    <div>
-        <h1>Poll Picker</h1>
-    </div>
-</section>
 <section id="tab">
-    <table>
-        <thead>
-            <th>Polls</th>
-        </thead>
-        <tbody>
-        {{#each polls}}
-            <tr>
-                <td>
-                    <a href="/polls/{{this.id}}" title="view">{{this.question}}</a>
-                </td>
-                {{#if ../user}}
-                <td class="text-center">
-                    <a href="/polls/delete/{{this.id}}" title="Delete" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>  
-                </td>
-                {{/if}}
-            </tr>
-        {{/each}}
-        </tbody>
-    </table>
-    {{#if user}}
-    <button class="create-poll-btn" onclick="location.href='/polls/create'">Create Poll</button>
+        {{#if user}}
+        <button class="create-poll-btn" onclick="location.href='/polls/create'">Create Poll</button>
     {{/if}}
+    <section id="polls-list">
+        {{#each polls}}
+        <a href="/polls/{{this.id}}" title="view">
+        <article class="poll-animate"> 
+            <p class="poll-list-link">{{this.question}}</p>  
+            <div>
+                <span>VOTES</span>
+                <span>{{this.totalVotes}}</span>
+            </div>
+        </article>
+        </a>
+        {{/each}}
+    </section>
 </section>
 <!-- HOME CONTENT END -->
 
