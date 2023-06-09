@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById(vote).textContent = voteCount;
         percentageBar.style.width = `${percentage}%`;
         const pollOptions = document.getElementsByClassName('poll-option');
-        document.querySelector('#vote-total').textContent = `Votes: ${totalVotes}`;
+        document.querySelector('#total-votes').textContent = totalVotes;
         for (var i=0; i < pollOptions.length; i++){
             var pollOption = pollOptions[i];
             var pollOptionValue = pollOption.querySelector('.vote-count').textContent;
@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     socket.on('vote-success', () => {
         document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
         document.querySelector('button').setAttribute('disabled', '');
+        document.querySelector('button').classList.remove('blink-animation');
         const radioButtons = document.querySelectorAll('.poll-answers label')
         for (let i = 0 ; i < radioButtons.length; i++) {
             radioButtons[i].style.display = "none";
@@ -69,7 +70,7 @@ function comparePasswords() {
     // Function to copy poll link to clipboard
 function copyLink(url) {
     navigator.clipboard.writeText(url);
-    document.getElementById('poll-url').textContent = 'POLL LINK COPIED!';
+    document.querySelector('div#poll-url span').textContent = 'Poll link copied!';
 }
 
 // Page UI Animations

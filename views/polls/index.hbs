@@ -48,17 +48,21 @@
             </div>
             {{/if}}
         </fieldset>
-        {{#unless hasVoted}}<button id="vote-btn">tap here to vote</button>{{/unless}}
+        {{#if hasVoted}}
+        <button id="vote-btn-voted">You Have Already Voted!</button>
+        {{else}}
+        <button id="vote-btn" class="blink-animation">tap here to vote</button>
+        {{/if}}
     </form>
 </section>
     <aside id="username-display">
         {{#if poll}}
             <div id="username-display-inner">
                 <div id="poll-info">
-                    <p id="vote-total">Votes: {{poll.totalVotes}}</p>
-                    <p id="vote-total">Posted By: {{poll.username}}</p>
+                    <div><span>Total Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
+                    <div><span>Started By</span><p>{{poll.username}}</p></div>
+                    <div id="poll-url" onclick="copyLink('{{pollUrl}}')"><i class="fa-solid fa-link"></i><span>TAP TO COPY POLL</span></div>
                 </div>
-                <p id="poll-url" onclick="copyLink('{{pollUrl}}')">TAP HERE TO COPY LINK TO CLIPBOARD</p>
             </div>
         {{/if}}
     </aside>
