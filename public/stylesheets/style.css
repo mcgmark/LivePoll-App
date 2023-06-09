@@ -433,7 +433,7 @@ article {
 article .poll-list-link {
   font-family: 'Cabin';
   color:rgb(134, 17, 143);
-  font-size: 2rem;
+  font-size: 1.5rem;
   letter-spacing: -.05rem;
   flex-grow: 1;
 }
@@ -492,6 +492,10 @@ article div span {
     transition: all 250ms ease;
     transform: scale(120%);
     box-shadow: 0px 0px 50px #00000030;
+  }
+
+  article .poll-list-link {
+    font-size: 2rem;
   }
 }
 
