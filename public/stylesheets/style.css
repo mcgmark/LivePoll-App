@@ -25,9 +25,10 @@ html {
 body {
   min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background: url('../images/header.png'), linear-gradient(180deg, #2f0050 37.5%, #2d0141 100%);
+  background: url('../images/bg.svg');
+  background-color: #4A136D;
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  background-size: 2500px;
 
   /* FLEXBOX */
   display: flex;
@@ -178,7 +179,7 @@ header img {
   border-radius: 3px;
   z-index: 100;
   transform-origin: left center;
-  transition: transform 0.5s,
+  transition: transform 0.25s,
               background-color 0.5s,
               opacity 0.55s ease;
 }
@@ -577,7 +578,7 @@ aside#username-display i {
   width: 92%;
   margin-left: auto;
   margin-right: auto;
-  border: 8px solid rgba(255, 255, 255, 0.074);
+  border: 8px solid #5a1784;
   border-radius: 50px;
   padding: 25px;
 }

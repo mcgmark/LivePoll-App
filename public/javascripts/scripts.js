@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
     socket.on('vote-success', () => {
         document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
         document.querySelector('button').setAttribute('disabled', '');
+        document.querySelector('button').style.opacity = '0.3';
         document.querySelector('button').classList.remove('blink-animation');
         const radioButtons = document.querySelectorAll('.poll-answers label')
         for (let i = 0 ; i < radioButtons.length; i++) {
