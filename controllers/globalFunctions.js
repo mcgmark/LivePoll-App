@@ -17,12 +17,14 @@ exports.isAuthenticated = (req, res, next) => {
 exports.hasVoted = async (req, res, next) => {
     const pollId = req.params.id;
     const ipAddress = req.ip;
-    console.log(ipAddress);
+    
     try {
         const existingVote = await Voter.findOne({ pollId, ipAddress });
         if (existingVote) {
             req.hasVoted = true;
             req.messages = "Thank You For Voting!";
+            req.vote = existingVote.vote;
+            
             next();
           } else {
             req.hasVoted = false;

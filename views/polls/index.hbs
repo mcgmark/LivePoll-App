@@ -6,8 +6,8 @@
             <div class="poll-option poll-animate answerOneCount">
                 <div class="poll-option-container">
                     {{#unless hasVoted}}
-                        <input type="radio" name="vote" id="answerOne" value="answerOneCount" required />
-                        <label for="answerOne"></label>
+                            <input type="radio" name="vote" id="answerOne" value="answerOneCount" required />
+                            <label for="answerOne"></label>
                     {{/unless}}
                     <span class="answer-label">{{poll.answerOne}}</span><span id="answerOneCount" class="vote-count">{{poll.answerOneCount}}</span>
                 </div>
@@ -51,7 +51,7 @@
         {{#if hasVoted}}
         <button id="vote-btn-voted">You Have Already Voted!</button>
         {{else}}
-        <button id="vote-btn" class="blink-animation">tap here to vote</button>
+        <button id="vote-btn" class="blink-animation">tap here to vote <i class="fa-solid fa-bolt"></i></button>
         {{/if}}
     </form>
 </section>
@@ -61,7 +61,7 @@
                 <div id="poll-info">
                     <div><span>Total Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
                     <div><span>Started By</span><p>{{poll.username}}</p></div>
-                    <div id="poll-url" onclick="copyLink('{{pollUrl}}')"><i class="fa-solid fa-link"></i><span>TAP TO COPY POLL</span></div>
+                    <div id="poll-url" onclick="copyLink('{{pollUrl}}')"><span>TAP TO COPY POLL</span><i class="fa-solid fa-link"></i></div>
                 </div>
             </div>
         {{/if}}

@@ -39,6 +39,10 @@ a {
   color: var(--purple);
 }
 
+a:visited {
+  color: #f1f1f1;
+}
+
 h1, h2, h3, p {
   margin: 0px;
   padding: 0px
@@ -56,7 +60,20 @@ fieldset {
   justify-content: center;
 }
 
+fieldset textarea {
+  border: 1px solid #fff !important;
+  color: #fff;
+  background-color: transparent;
+  font-family: 'cabin';
+  font-size: 2rem !important;
+}
+
+fieldset textarea::placeholder {
+  color: #fff;
+} 
+
 header {
+
   display: flex;
   align-items: center;
   padding-right: 20px;
@@ -221,38 +238,17 @@ header img {
 
 /* PAGE STYLES */
 
-section#page-top-container {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 8rem 1fr;
-}
-
-section#page-top-container div:first-of-type {
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-end;
-  padding-bottom: 1rem;
-  padding-right: 1.8rem;
-  border-bottom-right-radius: 25px;
-}
-
 section#page-top-container div:first-of-type i {
   width: fit-content;
   display: block;
   color: #fff;
-  font-size: 2.5rem;
+  font-size: 4rem;
 }
 
-
-section#page-top-container div:nth-of-type(2) {
-  display: flex;
-  align-items: end;
-  padding-left: 1.75rem;
-  padding-bottom: .25rem;
+section#page-top-container div h1 {
+  font-size: 4rem;
 }
+
 
 
 /* MAIN CONTAINER FOR PAGES */
@@ -282,8 +278,8 @@ p.messages {
   font-weight: 400;
   font-size: 15px;
   text-transform: uppercase;
-  color: #373737;
-  background: #F4F4F4;
+  color: #ffffff;
+  background: #ffffff1b;
   padding: .75rem;
   margin: 1rem auto 1rem auto;
 }
@@ -296,17 +292,6 @@ p.messages-voted {
   font-weight: 400;
   font-size: 15px;
   text-transform: uppercase;
-  color: #373737;
-  background: #F4F4F4;
-  padding: .75rem;
-  margin: 1rem auto 1rem auto;
-}
-
-p.messages-login {
-  font-family: 'Oswald';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 15px;
   color: #373737;
   background: #F4F4F4;
   padding: .75rem;
@@ -339,12 +324,18 @@ p.messages-error {
 }
 
 section#tab input {
+  color: #fff;
   font-family: 'Oswald', sans-serif;
   border: none;
-  border-bottom: 2px solid var(--purple);
-  font-size: 1.15rem;
+  border-bottom: 2px solid #fff;
+  font-size: 2rem;
   padding: 1rem;
   margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+section#tab input::placeholder {
+  color: #fff;
 }
 
 section#tab textarea {
@@ -364,14 +355,14 @@ section#tab textarea:focus {
   border: 2px solid #e100ff;
 }
 
-section#tab button, section#home-list button {
+section#tab button {
   width: 100%;
   border: none;
   font-family: 'Bayon';
   font-size: 1.8rem;
   padding: .45rem .15rem;
   margin-top: 2.5rem;
-  background-color: ;
+  background-color: var(--green);
   text-transform: uppercase;
   color: var(--purple);
   border-radius: 23px;
@@ -392,7 +383,6 @@ button.blink-animation {
   100% {
     background-color: #f1f1f1;
   }
-  
 }
 
 section#tab button:hover:disabled, section#home-list button:hover:disabled {
@@ -413,6 +403,14 @@ button.create-poll-btn{
   border-radius: 23px;
 }
 
+#menu a {
+  color:rgb(134, 17, 143);
+}
+
+#menu a:visited {
+  color:rgb(134, 17, 143);
+}
+
 /* HOME page styles */
 
 article {
@@ -428,6 +426,7 @@ article {
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 0px;
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 article .poll-list-link {
@@ -457,6 +456,7 @@ article div {
   justify-content: center;
   padding: 30px;
   background-color: #410059;
+  transition: all 250ms;
 }
 
 article div span:first-child {
@@ -491,7 +491,6 @@ article div span {
   section#polls-list a:hover article div {
     transition: all 250ms ease;
     transform: scale(120%);
-    box-shadow: 0px 0px 50px #00000030;
   }
 
   article .poll-list-link {
@@ -526,17 +525,17 @@ fieldset.poll-answers div input[type="radio"] {
 fieldset.poll-answers {
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
+  row-gap: 30px;
 }
 
 span.vote-count {
   font-size: 1.25rem;
   color: #fff;
   font-family: 'Bayon', sans-serif;
-  padding: .25rem .5rem;
+  padding: .15rem .7rem;
   background-color: var(--purple);
   margin-left: 1rem;
-  border-radius: 20px;
+  border-radius: 50px;
 }
 
 aside#poll-link {
@@ -566,21 +565,21 @@ aside#username-display div#poll-url:HOVER {
 
 aside#username-display i {
   font-size: 3rem;
-  color: #ffffff;
   margin-left: 3px;
   cursor: grab;
   padding: 4px;
   border-radius: 5px;
+  color: var(--green);
 }
 
 #username-display-inner {
   margin-top: 20px;
-  width: 95%;
+  width: 92%;
   margin-left: auto;
   margin-right: auto;
-  border: 4px solid rgba(255, 255, 255, 0.127);
+  border: 8px solid rgba(255, 255, 255, 0.074);
   border-radius: 50px;
-  padding: 20px
+  padding: 25px;
 }
 
 div#poll-info {
@@ -623,6 +622,11 @@ div#poll-info span {
   margin-top: 10px;
 }
 
+div#poll-info p {
+  font-weight: bold;
+  color: var(--green);
+}
+
 
 @media screen and (min-width: 600px){
   div#poll-info { 
@@ -638,13 +642,19 @@ div#poll-info span {
   display: flex;
   flex-direction: column;
   justify-items: center;
-  padding: 20px 10px;
-  border-radius: 15px;
+  padding: 10px 10px;
+  border-radius: 35px;
   overflow: hidden;
   background-color: #F4F4F4;
 }
 
+.poll-option:hover {
+  cursor: pointer;
+}
 
+button i {
+  font-size: 1.75rem;
+}
 
 /* Hide the default radio button */
 .poll-option input[type="radio"] {

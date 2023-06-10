@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
+
 function comparePasswords() {
     let pw1 = document.getElementById('password').value;
     let pw2 = document.getElementById('confirm').value;
@@ -97,6 +98,12 @@ element.style.transform = 'translateY(0)';
 // Poll Options
 
 const pollOptionElements = document.querySelectorAll('.poll-animate');
+
+for (var i=0; i < pollOptionElements.length; i++){
+    pollOptionElements[i].addEventListener('click', function() {
+        this.querySelector('input').checked = true;
+    })
+}
 
 for (var i=0; i < pollOptionElements.length; i++){
     var pollOption = pollOptionElements[i];

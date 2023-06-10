@@ -1,18 +1,11 @@
 
-
-<!-- REGISTER START -->
-<!-- PAGE HEADER -->
-<section id="page-top-container">
-    <div>
-       <i class="fa-solid fa-address-card"></i>
-    </div>
-    <div>
-        <h1>register</h1>
-    </div>
-</section>
-<!-- PAGE HEADER END -->
 <!-- PAGE CONTENT -->
 <section id="tab">
+  <section id="page-top-container">
+    <div>
+       <h1><i class="fa-solid fa-address-card"></i>register</h1>
+    </div>
+</section>
 {{#if messages}}
   <p class="messages-error">{{messages}}</p>
   {{else}}
@@ -25,7 +18,7 @@
       id="username"
       required
       type="email"
-      placeholder="YOU@EMAIL.COM"
+      placeholder="USERNAME"
     />
 
     <input

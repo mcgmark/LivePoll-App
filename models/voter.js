@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 const voterSchema = new mongoose.Schema({
   pollId: String,
-  ipAddress: String,
+  ipAddress: {
+    type: String,
+    default: '::1'
+},
   vote: String,
 });
 

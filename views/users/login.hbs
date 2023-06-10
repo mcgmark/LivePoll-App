@@ -1,20 +1,18 @@
 <!-- LOGIN START -->
 <!-- PAGE HEADER -->
-<section id="page-top-container">
-    <div>
-       <i class="fa-solid fa-lock"></i>
-    </div>
-    <div>
-        <h1>Login</h1>
-    </div>
-</section>
+
 <!-- PAGE HEADER END -->
 <!-- PAGE CONTENT -->
 <section id="tab">
+  <section id="page-top-container">
+    <div>     
+       <h1><i class="fa-solid fa-lock"></i>Login</h1>
+    </div>
+</section>
 {{#if messages}}
 <p class="messages-error">login failed please try again</p>
 {{else}}
-<p class="messages-login">PLEASE LOGIN - user@gc.ca : Test1234</p>
+<p class="messages">PLEASE LOGIN</p>
 {{/if}}
 <form method="post">
   <fieldset>
