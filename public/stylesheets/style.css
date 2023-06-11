@@ -431,9 +431,9 @@ article {
 article .poll-list-link {
   font-family: 'Cabin';
   color:rgb(134, 17, 143);
-  font-size: 1.5rem;
-  letter-spacing: -.05rem;
+  font-size: 1.75rem;
   flex-grow: 1;
+  margin-right: 10px;
 }
 
 section#polls-list a {
@@ -501,7 +501,7 @@ article div span {
   }
 
   article .poll-list-link {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 }
 
@@ -515,11 +515,11 @@ form {
 .question {
   color: #fff;
   font-family: 'Cabin', sans-serif;
-  font-size: 3rem;
+  font-size: 3.5rem;
   line-height: 140%;
   font-weight: 600;
   margin: 1.5rem 0rem;
-  letter-spacing: .25rem;
+  letter-spacing: .05rem;
   margin-bottom: 50px;
 }
 
@@ -581,7 +581,7 @@ aside#username-display i {
 
 #username-display-inner {
   margin-top: 20px;
-  width: 90%;
+  width: 93%;
   margin-left: auto;
   margin-right: auto;
   border: 8px solid #5a1784;
