@@ -400,7 +400,7 @@ button.create-poll-btn{
   background-color: var(--purple);
   text-transform: uppercase;
   color: #fff;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   border-radius: 23px;
 }
 
@@ -418,9 +418,7 @@ article {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  min-height: 200px;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  min-height: 225px;
   background-color:rgb(244, 244, 244);
   border-top-left-radius: 25px;
   border-top-right-radius: 0px;
@@ -443,8 +441,11 @@ section#polls-list a {
 }
 
 section#polls-list a:hover article {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  transition: all 250ms ease;
   background-color: var(--green);
-  box-shadow: 0px 0px 150px #c2ffe463;
+  box-shadow: 0px 0px 50px #0000004c;
 }
 
 article div {
@@ -477,6 +478,11 @@ article div span {
   height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 45px;
+}
+
+#polls-list a article {
+  transition: all 250ms ease;
 }
 
 @media screen and (min-width:780px) {
@@ -575,12 +581,12 @@ aside#username-display i {
 
 #username-display-inner {
   margin-top: 20px;
-  width: 92%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   border: 8px solid #5a1784;
   border-radius: 50px;
-  padding: 25px;
+  padding: 15px;
 }
 
 div#poll-info {
@@ -591,7 +597,7 @@ div#poll-info {
 }
 
 div#poll-info div p {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   line-height: 2rem;
   margin-top: 10px;
 }
@@ -609,18 +615,18 @@ div#poll-info div {
   display: grid;  
   grid-template-rows: 1fr 2fr;
   justify-content: center;
-  height: 120px;
+  height: 150px;
   background-color: #ffffff0e;
   border-radius: 25px;
   padding: 10px 20px;
-  border: 2px solid rgba(255, 255, 255, 0.127);
+  border: 2px dashed rgba(255, 255, 255, 0.218);
 }
 
 div#poll-info span {
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
-  margin-top: 10px;
+  margin-top: 14px;
 }
 
 div#poll-info p {
