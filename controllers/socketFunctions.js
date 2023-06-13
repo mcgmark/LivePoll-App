@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const Poll = require('../models/poll');
-const Voter = require('../models/voter');
+const mongoose = require('mongoose'); // require Mongoose
+const Poll = require('../models/poll'); // require poll model
+const Voter = require('../models/voter'); // require voter model
 
 module.exports = io => {
 
@@ -15,27 +15,35 @@ module.exports = io => {
         // Server player connected message 
         console.log('Socket Connected: ' + userId); 
 
-        // Handle join
+        // Handle join message
         socket.on('join', room => {
-            socket.join(room);
-            console.log(userId + " joined " + room);
-            io.to(room).emit('connected-to-poll');
+            socket.join(room); // join the socket to the roomn specific to the poll
+            io.to(room).emit('connected-to-poll'); // emit connected to room message to clients connected to specific room
         });
 
-        // Handle poll votes
-        socket.on('pollVote', async (id,vote) => {
+        // Handle pollVote message
+        socket.on('pollVote', async (pollVoteClientData) => {
+            const id = pollVoteClientData.pollId;
+            const vote = pollVoteClientData.vote
             try {
-                const updatedPoll = await Poll.findOneAndUpdate(
+                // find specific poll using id and increment fields
+                const updatedPoll = await Poll.findOneAndUpdate(  
                     { _id: id },
                     { $inc: { [vote]: 1, totalVotes: 1 } },
                     { new: true } // To return the updated document
                 );
-                const voteCount = updatedPoll[vote];
-                const totalVotes = updatedPoll['totalVotes'];      
-                io.to(id).emit('update-poll-results', vote, voteCount, totalVotes);
+                // store vote in database
                 const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress, vote: vote });
+                // setup updated vote data to update all connected socket clients
+                const voteData = {
+                    vote: vote,
+                    voteCount: updatedPoll[vote],
+                    totalVotes: updatedPoll['totalVotes']
+                }; 
+                // emit message to vote socket that their vote was successfully counted
                 io.to(userId).emit('vote-success');
-                console.log('vote success');
+                // emit message to all sockets connected to specific poll to update pol
+                io.to(id).emit('update-poll-results', voteData); 
             } catch (err) {
                 console.log('vote error');
             }

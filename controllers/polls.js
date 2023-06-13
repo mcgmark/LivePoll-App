@@ -1,5 +1,5 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express'); // require express
+const router = express.Router(); // create Router object
 
 // use Poll model for poll questions, answers, and counts
 const Poll = require('../models/poll');
@@ -8,8 +8,8 @@ const Poll = require('../models/poll');
 const global = require('../controllers/globalFunctions');
 
 
-/* GET /create - display form to add an employer */
-// Injecting auth check function as middlware for security
+/* GET /create - display form to create poll */
+// Auth check function as middlware 
 router.get('/create', global.isAuthenticated, (req, res) => {
             res.render('polls/create', {
                 title: 'Create a poll',
@@ -18,29 +18,27 @@ router.get('/create', global.isAuthenticated, (req, res) => {
        }
 );    
 
-  /* POST - Create */
+/* POST - Create */
 router.post('/create', global.isAuthenticated, async (req, res) => {  
     try {
-      const newPoll = await Poll.create(req.body);
-      console.log(newPoll);
-      res.redirect(`/polls/${newPoll._id}`); // Redirect to the new poll page
+      const newPoll = await Poll.create(req.body); // create new poll in database using form data 
+      res.redirect(`/polls/${newPoll._id}`); // Redirect user to the new poll
     } catch (err) {
       res.status(500).json({ error: err.message });
     }   
   });
 
-/* GET - Delete */
+/* GET - Delete poll route */
 router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
     try {
-      const deletedPoll = await Poll.findByIdAndDelete(req.params.id);
-      res.redirect('/');
+      const deletedPoll = await Poll.findByIdAndDelete(req.params.id); // find poll by id and delete from database
+      res.redirect('/'); // send user to poll list route
     } catch (err) {
       res.status(900).json({ error: err.message });
     }
 });
 
-// INDIVIDUAL
-/* GET - Read individual Poll by ID */
+/* GET - Load individual Poll by ID */
 router.get('/:id', global.hasVoted, async function(req, res) {
   const pollId = req.params.id;
   const fullUrl = `${req.get('host')}${req.originalUrl}`;
@@ -63,9 +61,7 @@ router.get('/:id', global.hasVoted, async function(req, res) {
     }
   });
 
-  
 
-  
 
 // make public
 module.exports = router;
