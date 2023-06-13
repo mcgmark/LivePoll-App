@@ -43,7 +43,7 @@ router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
 /* GET - Read individual Poll by ID */
 router.get('/:id', global.hasVoted, async function(req, res) {
   const pollId = req.params.id;
-  const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+  const fullUrl = `${req.get('host')}${req.originalUrl}`;
     try {
       const poll = await Poll.findById(pollId);
       if (!poll) {
