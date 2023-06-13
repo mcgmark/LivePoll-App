@@ -1,3 +1,21 @@
+const pollIdButton = document.getElementById("vote-btn");
+const hasVoted = pollIdButton.hasAttribute("disabled");
+
+    if (!hasVoted){
+        const question = document.querySelector('#question-container').textContent;
+        let questionContainer = document.querySelector('#question-container');
+        const paragraphHeight = questionContainer.offsetHeight;
+        questionContainer.style.height = `${paragraphHeight}px`;
+        questionContainer.textContent = '';
+
+        for (let i = 0; i < question.length; i++) {
+            let letter = question[i];
+            setTimeout(function () {
+            questionContainer.textContent += letter;
+            }, 30 * i);
+        };
+    };
+
 document.addEventListener("DOMContentLoaded", function() {
     const socket = io();
 
@@ -126,20 +144,3 @@ for (var i=0; i < pollOptionElements.length; i++){
     }) : false;
 };
 
-const pollIdButton = document.getElementById("vote-btn");
-const hasVoted = pollIdButton.hasAttribute("disabled");
-
-    if (!hasVoted){
-        const question = document.querySelector('#question-container').textContent;
-        let questionContainer = document.querySelector('#question-container');
-        const paragraphHeight = questionContainer.offsetHeight;
-        questionContainer.style.height = `${paragraphHeight}px`;
-        questionContainer.textContent = '';
-
-        for (let i = 0; i < question.length; i++) {
-            let letter = question[i];
-            setTimeout(function () {
-            questionContainer.textContent += letter;
-            }, 30 * i);
-        };
-    };
