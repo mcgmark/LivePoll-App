@@ -29,6 +29,7 @@ if (hasVoted() == 'false' && questionContainer){
     questionContainer.style.minHeight = `${paragraphHeight}px`;
     // set question text to initial blank state
     questionContainer.textContent = '';
+    questionContainer.style.color = `#fff`;
     // animate each letter of the question
     for (let i = 0; i < question.length; i++) {
         let letter = question[i];
