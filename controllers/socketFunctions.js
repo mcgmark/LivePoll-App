@@ -23,9 +23,8 @@ module.exports = io => {
             const id = pollVoteClientData.pollId;
             const vote = pollVoteClientData.vote
 
-            const existingVote = await Voter.findOne({ pollId: id, ipAddress: ipAddress }); // Find vote based on ip and poll id
-
-            console.log(existingVote);
+            // Find vote based on ip and poll id
+            const existingVote = await Voter.findOne({ pollId: id, ipAddress: ipAddress }); 
 
             if (!existingVote) {
                 try {

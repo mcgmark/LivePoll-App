@@ -53,6 +53,7 @@ router.get('/:id', global.hasVoted, async function(req, res) {
           user: req.user,
           hasVoted: req.hasVoted,
           messages: req.messages,
+          userVote: req.vote,
           pollUrl: fullUrl
         });
       }
