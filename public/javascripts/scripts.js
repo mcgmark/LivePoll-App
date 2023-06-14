@@ -88,16 +88,10 @@ socket.on('vote-success', () => {
     for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
     }
-    const pollOptionElementss = document.querySelectorAll('.poll-option');
-    for (let k = 0; k < pollOptionElementss.length; k++){
-        pollOptionElementss[k].removeEventListener('click', function() {
-            for (let k=0; k<pollOptionElements.length; k++){
-                pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
-            }
-            this.querySelector('input').checked = true;
-            this.querySelector('span.answer-label').classList.add('answer-label-selected');
-        });
-    }
+    const pollOptionElements = document.querySelectorAll('.poll-option');
+    for (var i=0; i < pollOptionElements.length; i++){
+        pollOptionElements[i].removeEventListener('click', vote);
+    };
 });
 
 // SocketIO End
@@ -158,19 +152,21 @@ var animation = element.animate([
 // grab all poll options
 const pollOptionElements = document.querySelectorAll('.poll-option');
 
+function vote() {
+    for (let k=0; k<pollOptionElements.length; k++){
+        pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
+    }
+    this.querySelector('input').checked = true;
+    this.querySelector('span.answer-label').classList.add('answer-label-selected');
+}
+
 // Animate percentage bars and poll option bounce
 if (pollOptionElements) {
 
     // Add event listener to poll option containers so that entire poll option can be clicked
     if (hasVoted() == 'false'){
         for (var i=0; i < pollOptionElements.length; i++){
-            pollOptionElements[i].addEventListener('click', function() {
-                for (let k=0; k<pollOptionElements.length; k++){
-                    pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
-                }
-                this.querySelector('input').checked = true;
-                this.querySelector('span.answer-label').classList.add('answer-label-selected');
-            });
+            pollOptionElements[i].addEventListener('click', vote);
         };
     };
 
