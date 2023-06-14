@@ -188,6 +188,7 @@ if (pollOptionElements) {
         console.log(pollOption);
         if (pollOption.classList.contains(vote)){
             pollOption.querySelector('span.answer-label').style.fontWeight = '700';
+            pollOption.querySelector('span.answer-label').style.fontSize = '2rem';
             console.log("voted " + vote);
         };
     };
