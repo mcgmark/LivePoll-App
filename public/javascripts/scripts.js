@@ -159,6 +159,7 @@ if (pollOptionElements) {
             });
         };
     };
+
     
     // Iterate through all pollOptionElements
     for (var i=0; i < pollOptionElements.length; i++){
@@ -182,5 +183,13 @@ if (pollOptionElements) {
             duration: 1000 * (i + 1),
             easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
         });
+
+        let vote = document.querySelector('#question-container').dataset.uservote;
+        console.log(pollOption);
+        if (pollOption.classList.contains(vote)){
+            console.log("voted " + vote);
+        };
     };
 };
+
+
