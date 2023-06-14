@@ -26,7 +26,7 @@ function hasVoted() {
 
 // if user hasn't voted animate the question display
 if (hasVoted() == false){
-    console.log("not voted");
+    console.log(hasVoted());
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
