@@ -38,7 +38,7 @@ if (hasVoted() == 'false' && questionContainer){
         }, 30 * i);
     };
 } else {
-    questionContainer.style.color = `#fff`;
+    questionContainer ? questionContainer.style.color = `#fff` : false;
 };
 
 // SocketIO Start
