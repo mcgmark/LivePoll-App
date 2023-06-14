@@ -14,6 +14,7 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
+        console.log(result);
         if (result == true){
             return true
         } else {
@@ -26,7 +27,6 @@ function hasVoted() {
 
 // if user hasn't voted animate the question display
 if (hasVoted() == false){
-    console.log(hasVoted());
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
