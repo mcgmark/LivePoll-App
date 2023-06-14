@@ -41,7 +41,7 @@ a {
 }
 
 a:visited {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
 
 h1, h2, h3, p {
@@ -190,6 +190,10 @@ header img {
   z-index: 50;
 }
 
+#menu a:visited {
+  color: var(--purple) !important;
+}
+
 #menu #menu-inner li {
   display: block;
 }
@@ -240,6 +244,7 @@ section#tab-create {
  border: 1px dashed rgba(255, 255, 255, 0.5);
  background-color: rgba(0, 0, 0, 0.3);
 }
+
 
 @media screen and (min-width: 600px) {
   section#tab {
