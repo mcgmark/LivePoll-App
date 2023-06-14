@@ -25,7 +25,7 @@ function hasVoted() {
 }; 
 
 // if user hasn't voted animate the question display
-if (hasVoted() == false){
+if (hasVoted() == true){
     console.log("not voted");
     // grab question
     const question = questionContainer.textContent;
