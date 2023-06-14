@@ -28,7 +28,7 @@ body {
   background: url('../images/bg.svg');
   background-color: #4A136D;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 3000px;
 
   /* FLEXBOX */
   display: flex;
