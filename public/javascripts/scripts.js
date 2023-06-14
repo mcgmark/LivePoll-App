@@ -11,16 +11,25 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 
 // Code to setup interface depending if the user voted
 // check if user has voted by checking if buttin is disabled
-const hasVoted = () => {
-    return document.getElementById("question-container").dataset.hasVoted;
+function hasVoted() {
+    if (questionContainer) {
+        let result = document.getElementById("question-container").dataset.hasvoted;
+    
+        if (result === true){
+            return true
+        } else {
+            return false;
+        }
+    };
 }; 
+
 // if user hasn't voted animate the question display
-if (hasVoted && questionContainer){
+if (!hasVoted() && questionContainer){
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
     const paragraphHeight = questionContainer.offsetHeight;
-    questionContainer.style.height = `${paragraphHeight}px`;
+    questionContainer.style.minHeight = `${paragraphHeight}px`;
     // set question text to initial blank state
     questionContainer.textContent = '';
     // animate each letter of the question
@@ -138,21 +147,20 @@ var animation = element.animate([
 
 // Poll Options Bounce Animation
 // grab all poll options
-const pollOptionElements = document.querySelectorAll('.poll-animate');
+const pollOptionElements = document.querySelectorAll('.poll-option');
 
 // Animate percentage bars and poll option bounce
-if (pollOptionElements && pollVoteButton) {
+if (pollOptionElements) {
 
-    // Add event listener to poll option container so that entire poll option can be clicked
+    // Add event listener to poll option containers so that entire poll option can be clicked
     for (var i=0; i < pollOptionElements.length; i++){
         pollOptionElements[i].addEventListener('click', function() {
             this.querySelector('input').checked = true;
-        })
-    }
+        });
+    };
     
     // Iterate through all pollOptionElements
     for (var i=0; i < pollOptionElements.length; i++){
-
         // animate transform translate to create bounce effect of each poll option
         var pollOption = pollOptionElements[i];
         var animation = pollOption.animate([
@@ -174,6 +182,4 @@ if (pollOptionElements && pollVoteButton) {
             easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
         });
     };
-}
-
-
+};

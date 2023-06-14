@@ -741,11 +741,10 @@ footer {
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-  border-top: 1px dashed rgba(255, 255, 255, 0.158);
 }
 
 footer p {
   color: rgba(255, 255, 255, 0.216);
-  font-size: 1rem;
+  font-size: .75rem;
   text-align: center;
 }
