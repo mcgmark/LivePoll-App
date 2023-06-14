@@ -15,13 +15,15 @@ function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
         return result;
+        console.log('true');
     } else {
         return false;
+        console.log('false');
     };
 }; 
 
 // if user hasn't voted animate the question display
-if (questionContainer){
+if (hasVoted() == false && questionContainer){
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
