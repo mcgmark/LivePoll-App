@@ -23,7 +23,8 @@ function hasVoted() {
 // if user hasn't voted animate the question display
 if (hasVoted() == false){
     // grab question
-    const question = questionContainer.textContent;
+    let question;
+    questionContainer ? question = questionContainer.textContent : false;
     // set paragraph height
     const paragraphHeight = questionContainer.offsetHeight;
     questionContainer.style.minHeight = `${paragraphHeight}px`;
