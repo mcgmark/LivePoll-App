@@ -47,7 +47,7 @@ socket.emit('join', pollId);
 
 // Listen for connection success message
 socket.on('connected-to-poll', room => {
-    console.log('Live Poll Updates Started');
+    console.log('LivePoll Connected');
 });
 
 // Handle update votes
@@ -195,13 +195,8 @@ if (pollOptionElements) {
         });
 
         let vote = document.querySelector('#question-container').dataset.uservote;
-        console.log(pollOption);
         if (pollOption.classList.contains(vote)){
-            // pollOption.querySelector('span.answer-label').style.fontWeight = '700';
-            // pollOption.querySelector('span.answer-label').style.fontSize = '1.8rem';
-            // pollOption.querySelector('span.answer-label').style.color = '#430c60';
             pollOption.querySelector('span.answer-label').classList.toggle('answer-label-selected');
-            console.log("voted " + vote);
         };
     };
 };
