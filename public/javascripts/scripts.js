@@ -90,7 +90,13 @@ socket.on('vote-success', () => {
     }
     const pollOptionElementss = document.querySelectorAll('.poll-option');
     for (let k = 0; k < pollOptionElementss.length; k++){
-        pollOptionElementss[k].removeEventListener('click', false);
+        pollOptionElementss[k].removeEventListener('click', function() {
+            for (let k=0; k<pollOptionElements.length; k++){
+                pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
+            }
+            this.querySelector('input').checked = true;
+            this.querySelector('span.answer-label').classList.add('answer-label-selected');
+        });
     }
 });
 
