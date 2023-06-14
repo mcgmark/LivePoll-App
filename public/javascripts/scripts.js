@@ -187,6 +187,7 @@ if (pollOptionElements) {
         let vote = document.querySelector('#question-container').dataset.uservote;
         console.log(pollOption);
         if (pollOption.classList.contains(vote)){
+            pollOption.querySelector('span.answer-label').style.fontWeight = 'bold';
             console.log("voted " + vote);
         };
     };
