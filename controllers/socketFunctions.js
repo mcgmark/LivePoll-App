@@ -28,6 +28,8 @@ module.exports = io => {
 
             const existingVote = await Voter.findOne({ id, ipAddress }); // Find vote based on ip and poll id
 
+            console.log(existingVote);
+
             if (!existingVote) {
                 try {
                     // find specific poll using id and increment fields

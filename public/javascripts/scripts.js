@@ -8,7 +8,6 @@ let pollId;
 questionContainer ? pollId = document.querySelector('#question-container').dataset.pollid : false;
 
 
-
 // Code to setup interface depending if the user voted
 // check if user has voted by checking if buttin is disabled
 function hasVoted() {
