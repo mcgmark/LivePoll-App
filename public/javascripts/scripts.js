@@ -37,6 +37,8 @@ if (hasVoted() == 'false' && questionContainer){
         questionContainer.textContent += letter;
         }, 30 * i);
     };
+} else {
+    questionContainer.style.color = `#fff`;
 };
 
 // SocketIO Start
