@@ -12,9 +12,6 @@ module.exports = io => {
         // Initialize variables to store id of player socket client
         const userId = socket.id;
 
-        // Server player connected message 
-        console.log('Socket Connected: ' + userId); 
-
         // Handle join message
         socket.on('join', room => {
             socket.join(room); // join the socket to the roomn specific to the poll
@@ -26,7 +23,7 @@ module.exports = io => {
             const id = pollVoteClientData.pollId;
             const vote = pollVoteClientData.vote
 
-            const existingVote = await Voter.findOne({ id, ipAddress }); // Find vote based on ip and poll id
+            const existingVote = await Voter.findOne({ pollId: id, ipAddress: ipAddress }); // Find vote based on ip and poll id
 
             console.log(existingVote);
 
