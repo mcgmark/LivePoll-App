@@ -712,6 +712,12 @@ span.answer-label {
   margin-left: 10px;
 }
 
+span.answer-label-selected {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: var(--purple);
+}
+
 
 .percentage-bar {
   position: absolute;
