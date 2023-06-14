@@ -85,8 +85,12 @@ socket.on('vote-success', () => {
     document.querySelector('button').style.opacity = '0.3';
     document.querySelector('button').classList.remove('blink-animation');
     const radioButtons = document.querySelectorAll('.poll-answers label')
-    for (let i = 0 ; i < radioButtons.length; i++) {
+    for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
+    }
+    const pollOptionElementss = document.querySelectorAll('.poll-option');
+    for (let k = 0; k < pollOptionElementss.length; k++){
+        pollOptionElementss[k].removeEventListener('click', false);
     }
 });
 
