@@ -155,7 +155,11 @@ if (pollOptionElements) {
     if (hasVoted() == 'false'){
         for (var i=0; i < pollOptionElements.length; i++){
             pollOptionElements[i].addEventListener('click', function() {
+                for (let k=0; k<pollOptionElements.length; k++){
+                    pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
+                }
                 this.querySelector('input').checked = true;
+                this.querySelector('span.answer-label').classList.add('answer-label-selected');
             });
         };
     };
