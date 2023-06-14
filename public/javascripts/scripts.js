@@ -14,16 +14,14 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-        return result;
-        console.log('true');
+        return result;      
     } else {
         return false;
-        console.log('false');
     };
 }; 
 
 // if user hasn't voted animate the question display
-if (hasVoted() == false && questionContainer){
+if (!hasVoted() && questionContainer){
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
@@ -38,8 +36,6 @@ if (hasVoted() == false && questionContainer){
         questionContainer.textContent += letter;
         }, 30 * i);
     };
-} else {
-    console.log("hello");
 };
 
 // SocketIO Start
