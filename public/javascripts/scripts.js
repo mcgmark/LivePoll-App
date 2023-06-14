@@ -14,12 +14,13 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-    
         if (result === true){
             return true
         } else {
             return false;
         }
+    } else {
+        return false;
     };
 }; 
 
