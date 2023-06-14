@@ -14,12 +14,7 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-        console.log(result);
-        if (result == true){
-            return true
-        } else {
-            return false;
-        }
+        return result;
     } else {
         return false;
     };
