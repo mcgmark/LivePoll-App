@@ -36,6 +36,8 @@ if (hasVoted() == false && questionContainer){
         questionContainer.textContent += letter;
         }, 30 * i);
     };
+} else {
+    console.log("hello");
 };
 
 // SocketIO Start
