@@ -152,10 +152,12 @@ const pollOptionElements = document.querySelectorAll('.poll-option');
 if (pollOptionElements) {
 
     // Add event listener to poll option containers so that entire poll option can be clicked
-    for (var i=0; i < pollOptionElements.length; i++){
-        pollOptionElements[i].addEventListener('click', function() {
-            this.querySelector('input').checked = true;
-        });
+    if (hasVoted() == 'false'){
+        for (var i=0; i < pollOptionElements.length; i++){
+            pollOptionElements[i].addEventListener('click', function() {
+                this.querySelector('input').checked = true;
+            });
+        };
     };
     
     // Iterate through all pollOptionElements
