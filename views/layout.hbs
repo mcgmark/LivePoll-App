@@ -28,22 +28,22 @@
           <span></span>
         </label>
         <section id="menu">
+          <section>
+              <a href="/"><img src="/images/livepoll-logo-black.svg" alt="Livepoll logo"></a>
+          </section>
           <section id="menu-inner">
             <ul>
               {{#if user}}
                 <li><a href="#">{{user.username}}</a></li>
                 <li><a href="/users/logout">Logout</a></li>
+                <li><a href="/polls/{{user.username}}">My Polls</a></li>
+                <li><a href="/">All Polls</a></li>
+                <li><a href="/polls/create">Create Poll</a></li>
               {{else}}
                 <li><a href="/users/register">Register</a></li>
                 <li><a href="/users/login">Login</a></li>
+                <li><a href="/">All Polls</a></li>
               {{/if}}
-            </ul>
-          </section>
-          <section>
-            <ul>
-              <li>Polls List</li>
-              <li></li>
-              <li></li>
             </ul>
           </section>
         </section> 

@@ -84,6 +84,7 @@ socket.on('vote-success', () => {
     document.querySelector('button').setAttribute('disabled', '');
     document.querySelector('button').style.opacity = '0.3';
     document.querySelector('button').classList.remove('blink-animation');
+    document.querySelector('button').style.cursor = "default";
     const radioButtons = document.querySelectorAll('.poll-answers label')
     for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
@@ -91,6 +92,7 @@ socket.on('vote-success', () => {
     const pollOptionElements = document.querySelectorAll('.poll-option');
     for (var i=0; i < pollOptionElements.length; i++){
         pollOptionElements[i].removeEventListener('click', vote);
+        pollOptionElements[i].style.cursor = "default";
     };
 });
 
@@ -122,13 +124,16 @@ function copyLink(url) {
 
 // Event handler for vote button
 pollVoteButton ? pollVoteButton.onclick = function(e) {
-    e.preventDefault();
-    const vote = document.querySelector('input[name="vote"]:checked').value;
-    const pollVoteClientData = {
-        pollId: pollId,
-        vote: vote
+    if (hasVoted() == 'false'){
+        console.log("test");
+        e.preventDefault();
+        const vote = document.querySelector('input[name="vote"]:checked').value;
+        const pollVoteClientData = {
+            pollId: pollId,
+            vote: vote
+        };
+        socket.emit('pollVote', pollVoteClientData);
     };
-    socket.emit('pollVote', pollVoteClientData);
 } : false;
 
 
@@ -167,6 +172,11 @@ if (pollOptionElements) {
     if (hasVoted() == 'false'){
         for (var i=0; i < pollOptionElements.length; i++){
             pollOptionElements[i].addEventListener('click', vote);
+        };
+    } else {
+        document.querySelector('button').style.cursor = 'default';
+        for (var i=0; i < pollOptionElements.length; i++){
+            pollOptionElements[i].style.cursor = 'default';
         };
     };
 

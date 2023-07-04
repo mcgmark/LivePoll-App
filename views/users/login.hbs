@@ -1,16 +1,12 @@
 <!-- LOGIN START -->
-<!-- PAGE HEADER -->
-
-<!-- PAGE HEADER END -->
-<!-- PAGE CONTENT -->
 <section id="tab" class="login">
   <section id="page-top-container">
     <div>     
-       <h1><i class="fa-solid fa-lock"></i>Login</h1>
+       <h1>Login</h1>
     </div>
 </section>
 {{#if messages}}
-<p class="messages-error">login failed please try again</p>
+<p class="messages-error">{{messages}}</p>
 {{else}}
 <p class="messages">PLEASE LOGIN</p>
 {{/if}}
@@ -23,5 +19,4 @@
   <button>GO</button>
 </form>
 </section>
-<!-- PAGE CONTENT END -->
 <!-- LOGIN END -->
