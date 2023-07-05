@@ -570,6 +570,16 @@ div#poll-info {
   flex-wrap: wrap;
 }
 
+div#poll-info a, div#poll-info a:visited {
+  color: var(--green);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+div#poll-info a:hover {
+  color: #fff;
+}
+
 
 div#poll-info div p {
   font-size: 1.5rem;
@@ -639,6 +649,18 @@ div#poll-url p {
   div#poll-info { 
     flex-direction: row;
   }
+}
+
+section#user-poll-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: 'Bayon';
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  padding: 10px 3px;
 }
 
 

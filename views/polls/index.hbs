@@ -60,7 +60,7 @@
             <div id="username-display-inner">
                 <div id="poll-info">
                     <div><span>Total Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
-                    <div><span>Started By</span><p>{{poll.username}}</p></div>
+                    <div><span>Started By</span><p><a href="/users/{{poll.username}}">{{poll.username}}</a></p></div>
                     <div id="poll-url" onclick="copyLink('{{pollUrl}}')"><span>COPY POLL LINK</span><p>{{pollUrl}}</p></div>
                 </div>
             </div>

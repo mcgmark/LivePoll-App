@@ -1,6 +1,11 @@
 <!-- HOME CONTENT START -->
 <section id="tab">
-        {{#if user}}
+    {{#if username}}
+    <section id="user-poll-list">
+        {{username}} - {{pollCount}} Polls
+    </section>
+    {{/if}}
+    {{#if user}}
         <button class="create-poll-btn" onclick="location.href='/polls/create'"><i class="fa-solid fa-circle-plus"></i> Create Poll</button>
     {{/if}}
     <section id="polls-list">

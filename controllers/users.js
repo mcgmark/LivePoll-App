@@ -2,6 +2,7 @@ const express = require('express'); // require express
 const router = express.Router(); // use router object
 const passport = require('passport'); // require passport
 const User = require('../models/user'); // require user model
+const Poll = require('../models/poll'); // require polls model
 
 // GET - Register form route
 router.get('/register', (req, res) => {
@@ -74,5 +75,25 @@ router.get('/google/callback', passport.authenticate('google', {
     failureMessage: 'Could not authenticate with google'
 }))
 
+/* GET - Load individual Poll by ID */
+router.get('/:username', async function(req, res) {
+    const username = req.params.username;
+      try {
+        const polls = await Poll.find({username: username});
+        const pollCount = await Poll.count({username: username});
+        if (!polls) {
+          res.status(404).send('Poll not found');
+        } else {
+          res.render('home', { 
+            polls: polls,
+            user: req.user,
+            username: username,
+            pollCount: pollCount
+          });
+        }
+      } catch (err) {
+        res.status(500).send(err.message);
+      }
+    });
 
 module.exports = router;

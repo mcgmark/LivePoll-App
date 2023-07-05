@@ -125,7 +125,6 @@ function copyLink(url) {
 // Event handler for vote button
 pollVoteButton ? pollVoteButton.onclick = function(e) {
     if (hasVoted() == 'false'){
-        console.log("test");
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         const pollVoteClientData = {
@@ -133,6 +132,9 @@ pollVoteButton ? pollVoteButton.onclick = function(e) {
             vote: vote
         };
         socket.emit('pollVote', pollVoteClientData);
+    } else {
+        e.preventDefault();
+        console.log("test");
     };
 } : false;
 
@@ -174,10 +176,15 @@ if (pollOptionElements) {
             pollOptionElements[i].addEventListener('click', vote);
         };
     } else {
-        document.querySelector('button').style.cursor = 'default';
         for (var i=0; i < pollOptionElements.length; i++){
             pollOptionElements[i].style.cursor = 'default';
         };
+    };
+
+    
+    if (hasVoted() == 'true'){
+        document.querySelector('button').style.cursor = 'default';
+        document.querySelector('button').disabled = true;
     };
 
     
