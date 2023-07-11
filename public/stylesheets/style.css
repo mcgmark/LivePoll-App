@@ -621,6 +621,10 @@ div#poll-info div:nth-of-type(2){
   grid-area: username;
 }
 
+div#poll-info div:nth-of-type(2):hover{
+  cursor: pointer;
+}
+
 div#poll-info div:nth-of-type(3){
   border-radius: 0;
   border-left: 1px solid #ffffff81;
@@ -845,4 +849,24 @@ fieldset.poll-timer-container {
 .poll-timer-options{
   display: flex;
   align-items: center;
+}
+
+p#poll-timer span {
+  font-size: 1.5rem;
+}
+
+p#poll-timer span.animate-blink {
+  animation: blinker 1000ms infinite forwards;
+}
+
+@keyframes blinker {
+  0% {
+    color:rgba(125, 255, 160, 0.609);
+  }
+  50% {
+    color: var(--green);
+  }
+  100% {
+    color:rgba(125, 255, 160, 0.609);
+  }
 }

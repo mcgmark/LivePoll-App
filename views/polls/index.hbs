@@ -75,7 +75,7 @@
                     <div><span>Started By</span><p><a href="/users/{{poll.username}}">{{poll.username}}</a></p></div>
                     <div><span>Poll Timer</span>
                         {{#if active}}
-                            <p id="pollTimer" data-hours="{{hours}}" data-minutes="{{minutes}}">{{hours}}hrs:{{minutes}}min</p>
+                            <p id="poll-timer" data-hours="{{hours}}" data-minutes="{{minutes}}">{{hours}}h<span class="animate-blink">:</span>{{minutes}}m</p>
                         {{else}}
                             <p>closed</p>
                         {{/if}}

@@ -229,7 +229,7 @@ if (pollOptionElements) {
 
 
 window.addEventListener('DOMContentLoaded', () => {
-    const timerElement = document.getElementById('pollTimer');
+    const timerElement = document.getElementById('poll-timer');
     const initialHours = parseInt(timerElement.dataset.hours);
     const initialMinutes = parseInt(timerElement.dataset.minutes);
 
@@ -237,19 +237,36 @@ window.addEventListener('DOMContentLoaded', () => {
     let minutes = initialMinutes;
 
     const updateTimer = () => {
-      if (hours === 0 && minutes === 0) {
+      if (hours == 0 && minutes == 0) {
         clearInterval(intervalId);
+        document.querySelector('.animate-blink').classList.remove('animate-blink');
+        document.querySelector('button').innerText = 'POLL CLOSED!'
+        document.querySelector('button').disabled = true;
+        document.querySelector('button').style.opacity = '0.3';
+        document.querySelector('button').classList.remove('blink-animation');
+        document.querySelector('button').style.cursor = "default";
+        timerElement.innerHTML = 'closed';
+        const radioButtons = document.querySelectorAll('.poll-answers label')
+        localStorage.setItem('voted_before', 'true');
+        for (let i = 0; i < radioButtons.length; i++) {
+            radioButtons[i].style.display = "none";
+        }
+        const pollOptionElements = document.querySelectorAll('.poll-option');
+        for (var i=0; i < pollOptionElements.length; i++){
+            pollOptionElements[i].removeEventListener('click', vote);
+            pollOptionElements[i].style.cursor = "default";
+        };
         return;
       }
 
-      if (minutes === 0) {
+      if (minutes == 0) {
         hours--;
         minutes = 59;
       } else {
         minutes--;
       }
 
-      timerElement.innerText = `${hours.toString().padStart(2, '0')}hr:${minutes.toString().padStart(2, '0')}min`;
+      timerElement.innerHTML = `${hours.toString().padStart(2, '0')}h<span class="animate-blink">:</span>${minutes.toString().padStart(2, '0')}m`;
     };
 
     updateTimer();
