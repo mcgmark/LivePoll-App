@@ -22,7 +22,7 @@ hbs.registerHelper('percent', function (votes, totalVotes) {
   return `${percentage.toFixed(2)}%`;
 });
 
-console.log('percentage helper registered');
+
 
 app.use(logger('dev'));
 app.use(express.json());

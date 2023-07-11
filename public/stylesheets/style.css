@@ -565,9 +565,8 @@ aside#username-display i {
 
 div#poll-info {
   display: grid;
-  grid-template-areas: "totalvotes username"
-                        "link link";
-  flex-wrap: wrap;
+  grid-template-areas: "totalvotes username expiry"
+                        "link link link";
 }
 
 div#poll-info a, div#poll-info a:visited {
@@ -588,7 +587,7 @@ div#poll-info div p {
 }
 
 div#poll-info div:nth-of-type(1) p {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 div#poll-url span {
@@ -620,6 +619,12 @@ div#poll-info div:nth-of-type(1){
 
 div#poll-info div:nth-of-type(2){
   grid-area: username;
+}
+
+div#poll-info div:nth-of-type(3){
+  border-radius: 0;
+  border-left: 1px solid #ffffff81;
+  grid-area: expiry;
 }
 
 div#poll-url {
@@ -773,4 +778,71 @@ footer p {
   color: rgba(255, 255, 255, 0.216);
   font-size: .75rem;
   text-align: center;
+}
+
+
+/* CREATE PAGE RADIO BUTTON */
+
+/* Hide the default radio button */
+.poll-timer-options input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* Create the custom radio button */
+.poll-timer-options label:first-of-type {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: relative;
+  cursor: pointer;
+}
+
+/* Style the inner circle */
+.poll-timer-options label:first-of-type::after {
+  content: "";
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+
+/* Show the inner circle when the radio button is checked */
+.poll-timer-options input[type="radio"]:checked + label:first-of-type::after {
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+}
+
+.poll-timer-options label:nth-of-type(2) {
+  display: inline-block;
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+fieldset.poll-timer-container {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.poll-timer-options{
+  display: flex;
+  align-items: center;
 }

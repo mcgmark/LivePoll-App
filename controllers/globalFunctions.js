@@ -1,6 +1,7 @@
 const express = require('express'); //Require express
 const mongoose = require('mongoose'); //Require mongoose database
 const Voter = require('../models/voter'); //Require voter model
+const Poll = require('../models/poll');
 
 // public function auth check 
 exports.isAuthenticated = (req, res, next) => {
@@ -26,12 +27,45 @@ exports.hasVoted = async (req, res, next) => {
             req.hasVoted = true; // set boolean to true
             req.messages = "Thank You For Voting!"; //set message
             req.vote = existingVote.vote; // set the users vote
-            next(); // continue
           } else {
             req.hasVoted = false;
-            next();
           }
         } catch (error) {
-          onsole.log(error);
+          console.log(error);
     }  
+    next(); // continue
+};
+
+exports.pollOpen = async (req, res, next) => {
+  const pollId = req.params.id; // grab the poll id from request params
+  try {
+    const poll = await Poll.findById(pollId);
+    if (poll.active) {
+      const date = Date.now();
+      let expiryTimer = [];
+      let timeTest = ((date - poll.expiry) / 3.6e+6) * -1;
+      timeTest = timeTest.toFixed(2);
+      timeTest = timeTest.toString();
+      let timerSplit = timeTest.split(".");
+      let timerHours = timerSplit[0];
+      let timerMinutes = timerSplit[1];
+      timerMinutes = `.${timerMinutes}`;
+      timerMinutesS = parseFloat(timerMinutes);
+      timerMinutes = timerMinutes * 60;
+      timerMinutes = timerMinutes.toFixed();
+      req.hours = timerHours;
+      req.minutes = timerMinutes;
+      if (date >= poll.expiry){ // closed
+        await Poll.findOneAndUpdate({_id: pollId}, {active: false})
+        req.active = false;
+      } else if (date <= poll.expiry){ // open
+        req.active = true;
+      }
+    } else {
+      req.active = false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  next(); // continue
 };

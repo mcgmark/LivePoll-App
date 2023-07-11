@@ -19,8 +19,17 @@ function hasVoted() {
     };
 }; 
 
+function active() {
+    if (questionContainer) {
+        let result = document.getElementById("question-container").dataset.active;
+        return result;      
+    } else {
+        return false;
+    };
+}; 
+
 // if user hasn't voted animate the question display
-if (hasVoted() == 'false' && questionContainer){
+if (hasVoted() == 'false' && active() == 'true' && questionContainer){
     // grab question
     const question = questionContainer.textContent;
     // set paragraph height
@@ -81,11 +90,12 @@ socket.on('update-poll-results', (voteData) => {
 // Handle vote success
 socket.on('vote-success', () => {
     document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
-    document.querySelector('button').setAttribute('disabled', '');
+    document.querySelector('button').disabled = true;
     document.querySelector('button').style.opacity = '0.3';
     document.querySelector('button').classList.remove('blink-animation');
     document.querySelector('button').style.cursor = "default";
     const radioButtons = document.querySelectorAll('.poll-answers label')
+    localStorage.setItem('voted_before', 'true');
     for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
     }
@@ -124,7 +134,7 @@ function copyLink(url) {
 
 // Event handler for vote button
 pollVoteButton ? pollVoteButton.onclick = function(e) {
-    if (hasVoted() == 'false'){
+    if (hasVoted() == 'false' && active() == 'true'){
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         const pollVoteClientData = {
@@ -134,7 +144,6 @@ pollVoteButton ? pollVoteButton.onclick = function(e) {
         socket.emit('pollVote', pollVoteClientData);
     } else {
         e.preventDefault();
-        console.log("test");
     };
 } : false;
 
@@ -171,7 +180,7 @@ function vote() {
 if (pollOptionElements) {
 
     // Add event listener to poll option containers so that entire poll option can be clicked
-    if (hasVoted() == 'false'){
+    if (hasVoted() == 'false' && active() == 'true'){
         for (var i=0; i < pollOptionElements.length; i++){
             pollOptionElements[i].addEventListener('click', vote);
         };
@@ -182,7 +191,7 @@ if (pollOptionElements) {
     };
 
     
-    if (hasVoted() == 'true'){
+    if (hasVoted() == 'true' || active() == 'false'){
         document.querySelector('button').style.cursor = 'default';
         document.querySelector('button').disabled = true;
     };
@@ -219,3 +228,30 @@ if (pollOptionElements) {
 };
 
 
+window.addEventListener('DOMContentLoaded', () => {
+    const timerElement = document.getElementById('pollTimer');
+    const initialHours = parseInt(timerElement.dataset.hours);
+    const initialMinutes = parseInt(timerElement.dataset.minutes);
+
+    let hours = initialHours;
+    let minutes = initialMinutes;
+
+    const updateTimer = () => {
+      if (hours === 0 && minutes === 0) {
+        clearInterval(intervalId);
+        return;
+      }
+
+      if (minutes === 0) {
+        hours--;
+        minutes = 59;
+      } else {
+        minutes--;
+      }
+
+      timerElement.innerText = `${hours.toString().padStart(2, '0')}hr:${minutes.toString().padStart(2, '0')}min`;
+    };
+
+    updateTimer();
+    const intervalId = setInterval(updateTimer, 60000); // Update every minute
+  });

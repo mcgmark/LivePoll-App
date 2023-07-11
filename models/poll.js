@@ -12,6 +12,21 @@ const pollSchema = new mongoose.Schema({
         type: String,
         default: 'Admin'
     },
+    date: {
+        type: Date,
+        default: Date.now
+    },
+    expiryLength: {
+        type: Number,
+        default: 1
+    },
+    expiry: {
+        type: Date,
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
     answerOne: {
         type: String,
         required: 'Atleast 2 poll options are required'
@@ -47,6 +62,15 @@ const pollSchema = new mongoose.Schema({
         default: 0
     }
 });
+
+// set poll expiry
+pollSchema.pre('save', function(next) {
+    console.log(this.expiry);
+    const currentDate = this.date;
+    const millisecondsInDay = this.expiryLength * 24 * 60 * 60 * 1000;
+    this.expiry = new Date(currentDate.getTime() + millisecondsInDay);
+    next();
+  });
 
 module.exports = mongoose.model('Poll', pollSchema);
 

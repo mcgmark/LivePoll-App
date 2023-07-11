@@ -14,7 +14,24 @@
     <input type="text" name="answerThree" id="answerThree" placeholder="Option #3" />
     <input type="text" name="answerFour" id="answerFour" placeholder="Option #4" />
    </fieldset>
-  <button><i class="fa-solid fa-circle-arrow-right"></i> Start</button>
+   <fieldset class="poll-timer-container">
+      <div class="poll-timer-options">
+        <input type="radio" name="expiryLength" id="one" value="1" checked />
+        <label for="one"></label>
+        <label class="timer-label" for="one">1 Day</label>
+      </div>
+      <div class="poll-timer-options">
+        <input type="radio" name="expiryLength" id="two" value="2"/>
+        <label for="two"></label>
+        <label for="two">2 Days</label>
+      </div>
+      <div class="poll-timer-options">
+        <input type="radio" name="expiryLength" id="three" value="3"/>
+        <label for="three"></label>
+        <label for="three">3 Days</label>
+      </div>
+   </fieldset>
+  <button>Start <i class="fa-solid fa-circle-arrow-right"></i></button>
 </form>
 </section>
 <!-- CREATE POLL END -->

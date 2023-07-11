@@ -1,24 +1,28 @@
 <!-- POLL START -->
 <section id="tab" class="poll-container">
-    <p id="question-container" class="question" data-pollid="{{poll._id}}" data-hasvoted="{{hasVoted}}" data-uservote="{{userVote}}">{{poll.question}}</p>
+    <p id="question-container" class="question" data-pollid="{{poll._id}}" data-hasvoted="{{hasVoted}}" data-active="{{active}}" data-uservote="{{userVote}}">{{poll.question}}</p>
     <form>
         <fieldset class="poll-answers">
             <div class="poll-option poll-animate answerOneCount">
                 <div class="poll-option-container">
-                    {{#unless hasVoted}}
+                    {{#if active}}
+                        {{#unless hasVoted}}
                             <input type="radio" name="vote" id="answerOne" value="answerOneCount" required />
                             <label for="answerOne"></label>
-                    {{/unless}}
+                        {{/unless}}
+                    {{/if}}
                     <span class="answer-label">{{poll.answerOne}}</span><span id="answerOneCount" class="vote-count">{{poll.answerOneCount}}</span>
                 </div>
                 <div class="percentage-bar answerOneCount" style="width:{{percent poll.answerOneCount poll.totalVotes}}"></div>
             </div>
             <div class="poll-option poll-animate answerTwoCount">
                 <div class="poll-option-container">
-                    {{#unless hasVoted}}
-                        <input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required />
-                        <label for="answerTwo"></label>
-                    {{/unless}}
+                    {{#if active}}
+                        {{#unless hasVoted}}
+                            <input type="radio" name="vote" id="answerTwo" value="answerTwoCount" required />
+                            <label for="answerTwo"></label>
+                        {{/unless}}
+                    {{/if}}
                     <span class="answer-label">{{poll.answerTwo}}</span><span id="answerTwoCount" class="vote-count">{{poll.answerTwoCount}}</span>
                 </div>
                 <div class="percentage-bar answerTwoCount" style="width:{{percent poll.answerTwoCount poll.totalVotes}}"></div>
@@ -26,10 +30,12 @@
             {{#if poll.answerThree}}
             <div class="poll-option poll-animate answerThreeCount">
                 <div class="poll-option-container">
-                    {{#unless hasVoted}}
-                        <input type="radio" name="vote" id="answerThree" value="answerThreeCount" required />
-                        <label for="answerThree"></label>
-                    {{/unless}}
+                    {{#if active}}
+                        {{#unless hasVoted}}
+                            <input type="radio" name="vote" id="answerThree" value="answerThreeCount" required />
+                            <label for="answerThree"></label>
+                        {{/unless}}
+                    {{/if}}
                     <span class="answer-label">{{poll.answerThree}}</span><span id="answerThreeCount" class="vote-count">{{poll.answerThreeCount}}</span>
                 </div>
                 <div class="percentage-bar answerThreeCount" style="width:{{percent poll.answerThreeCount poll.totalVotes}}"></div>
@@ -38,20 +44,26 @@
             {{#if poll.answerFour}}
             <div class="poll-option poll-animate answerFourCount">
                 <div class="poll-option-container">
-                    {{#unless hasVoted}}
-                        <input type="radio" name="vote" id="answerFour" value="answerFourCount" required />
-                        <label for="answerFour"></label>
-                    {{/unless}}
+                    {{#if active}}
+                        {{#unless hasVoted}}
+                            <input type="radio" name="vote" id="answerFour" value="answerFourCount" required />
+                            <label for="answerFour"></label>
+                        {{/unless}}
+                    {{/if}}
                     <span class="answer-label">{{poll.answerFour}}</span><span id="answerFourCount" class="vote-count">{{poll.answerFourCount}}</span>
                 </div>
                 <div class="percentage-bar answerFourCount" style="width:{{percent poll.answerFourCount poll.totalVotes}}"></div>
             </div>
             {{/if}}
         </fieldset>
-        {{#if hasVoted}}
-        <button id="vote-btn-voted">You Have Already Voted!</button>
+        {{#if active}}
+            {{#if hasVoted}}
+                <button id="vote-btn-voted">You Have Already Voted!</button>
+            {{else}}
+                <button id="vote-btn" class="blink-animation">tap here to vote <i class="fa-solid fa-bolt"></i></button>
+            {{/if}}
         {{else}}
-        <button id="vote-btn" class="blink-animation">tap here to vote <i class="fa-solid fa-bolt"></i></button>
+                <button id="vote-btn-voted">Poll Closed!</button>
         {{/if}}
     </form>
 </section>
@@ -61,6 +73,13 @@
                 <div id="poll-info">
                     <div><span>Total Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
                     <div><span>Started By</span><p><a href="/users/{{poll.username}}">{{poll.username}}</a></p></div>
+                    <div><span>Poll Timer</span>
+                        {{#if active}}
+                            <p id="pollTimer" data-hours="{{hours}}" data-minutes="{{minutes}}">{{hours}}hrs:{{minutes}}min</p>
+                        {{else}}
+                            <p>closed</p>
+                        {{/if}}
+                    </div>
                     <div id="poll-url" onclick="copyLink('{{pollUrl}}')"><span>COPY POLL LINK</span><p>{{pollUrl}}</p></div>
                 </div>
             </div>

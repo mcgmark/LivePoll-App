@@ -20,6 +20,7 @@ router.get('/create', global.isAuthenticated, (req, res) => {
 
 /* POST - Create */
 router.post('/create', global.isAuthenticated, async (req, res) => {  
+
     try {
       const newPoll = await Poll.create(req.body); // create new poll in database using form data 
       res.redirect(`/polls/${newPoll._id}`); // Redirect user to the new poll
@@ -39,7 +40,7 @@ router.get('/delete/:id',  global.isAuthenticated,  async (req, res) => {
 });
 
 /* GET - Load individual Poll by ID */
-router.get('/:id', global.hasVoted, async function(req, res) {
+router.get('/:id', global.hasVoted, global.pollOpen, async function(req, res) {
   const pollId = req.params.id;
   const fullUrl = `${req.get('host')}${req.originalUrl}`;
     try {
@@ -52,6 +53,9 @@ router.get('/:id', global.hasVoted, async function(req, res) {
           poll: poll,
           user: req.user,
           hasVoted: req.hasVoted,
+          active: req.active,
+          hours: req.hours,
+          minutes: req.minutes,
           messages: req.messages,
           userVote: req.vote,
           pollUrl: fullUrl
