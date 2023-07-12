@@ -1,113 +1,38 @@
-// SocketIO
-const socket = io(); // create io object
-
-// grab poll id and vote button
+// grab dom elements
 const pollVoteButton = document.getElementById("vote-btn");
 const questionContainer = document.querySelector('#question-container');
-let pollId;
 questionContainer ? pollId = document.querySelector('#question-container').dataset.pollid : false;
 
+// grab all poll options
+const pollOptionElements = document.querySelectorAll('.poll-option');
 
-// Code to setup interface depending if the user voted
-// check if user has voted by checking if buttin is disabled
+// function to check if user has voted by checking if buttin is disabled
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-        return result;      
+        if (result == 'true') {
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     };
 }; 
 
+// function to check if poll is active
 function active() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.active;
-        return result;      
+        if (result == 'true') {
+            return true;
+        } else {
+            return false;
+        }     
     } else {
         return false;
     };
 }; 
-
-// if user hasn't voted animate the question display
-if (hasVoted() == 'false' && active() == 'true' && questionContainer){
-    // grab question
-    const question = questionContainer.textContent;
-    // set paragraph height
-    const paragraphHeight = questionContainer.offsetHeight;
-    questionContainer.style.minHeight = `${paragraphHeight}px`;
-    // set question text to initial blank state
-    questionContainer.textContent = '';
-    questionContainer.style.color = `#fff`;
-    // animate each letter of the question
-    for (let i = 0; i < question.length; i++) {
-        let letter = question[i];
-        setTimeout(function () {
-        questionContainer.textContent += letter;
-        }, 30 * i);
-    };
-} else {
-    questionContainer ? questionContainer.style.color = `#fff` : false;
-};
-
-// SocketIO Start
-
-// Join socketIO room with pollId
-socket.emit('join', pollId);
-
-// Listen for connection success message
-socket.on('connected-to-poll', room => {
-    console.log('LivePoll Connected');
-});
-
-// Handle update votes
-socket.on('update-poll-results', (voteData) => {
-    // set variables with data
-    const vote = voteData.vote; 
-    const voteCount = voteData.voteCount;
-    const totalVotes = voteData.totalVotes;
-    // calculate new percentage
-    const percentage = (voteCount / totalVotes) * 100;
-    // grab percentage bar element
-    const percentageBar = document.querySelector(`.percentage-bar.${vote}`);
-    // set the textContent for the value with the updated vote count.
-    document.getElementById(vote).textContent = voteCount;
-    // set percentage bar width with new width for vote
-    percentageBar.style.width = `${percentage}%`;
-    // grab all poll options
-    const pollOptions = document.getElementsByClassName('poll-option');
-    // set the total votes output to the updated todal votes
-    document.querySelector('#total-votes').textContent = totalVotes;
-    // iterate through all of the poll options and update the percentage bars
-    for (var i=0; i < pollOptions.length; i++){
-        var pollOption = pollOptions[i]; // grab specific poll option
-        var pollOptionValue = pollOption.querySelector('.vote-count').textContent; // grab the amount of votes
-        const pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');  // grab the percentage bar 
-        var newPercentageValue = (pollOptionValue / totalVotes) * 100; // calculate new percentage using vote value and total votes
-        pollOptionPercentageBar.style.width = `${newPercentageValue}%`; // update style value of poll option percentage bar element
-    }
-});
-
-// Handle vote success
-socket.on('vote-success', () => {
-    document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
-    document.querySelector('button').disabled = true;
-    document.querySelector('button').style.opacity = '0.3';
-    document.querySelector('button').classList.remove('blink-animation');
-    document.querySelector('button').style.cursor = "default";
-    const radioButtons = document.querySelectorAll('.poll-answers label')
-    localStorage.setItem('voted_before', 'true');
-    for (let i = 0; i < radioButtons.length; i++) {
-        radioButtons[i].style.display = "none";
-    }
-    const pollOptionElements = document.querySelectorAll('.poll-option');
-    for (var i=0; i < pollOptionElements.length; i++){
-        pollOptionElements[i].removeEventListener('click', vote);
-        pollOptionElements[i].style.cursor = "default";
-    };
-});
-
-// SocketIO End
-
 
 // function for the register page to compare if passwords match for confirmation
 function comparePasswords() {
@@ -129,12 +54,12 @@ function comparePasswords() {
 // Function to copy poll link to clipboard
 function copyLink(url) {
     navigator.clipboard.writeText(url);
-    document.querySelector('div#poll-url span').textContent = 'Poll link copied!';
+    document.querySelector('#poll-url span').textContent = 'Poll link copied!';
 }
 
 // Event handler for vote button
 pollVoteButton ? pollVoteButton.onclick = function(e) {
-    if (hasVoted() == 'false' && active() == 'true'){
+    if (!hasVoted() && active()){
         e.preventDefault();
         const vote = document.querySelector('input[name="vote"]:checked').value;
         const pollVoteClientData = {
@@ -148,7 +73,10 @@ pollVoteButton ? pollVoteButton.onclick = function(e) {
 } : false;
 
 
-// Page UI Animations on page load
+//
+//   Page UI Animations on page load
+//
+///////////////////////////////////////////
 
 // Main page element bounce
 var element = document.getElementById('main-inner');
@@ -163,11 +91,25 @@ var animation = element.animate([
     easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
 });
 
+// if user hasn't voted, and the poll is active animate the question text 
+if (!hasVoted() && active() && questionContainer){
+    const question = questionContainer.textContent; // grab question text
+    const paragraphHeight = questionContainer.offsetHeight;     // set paragraph height
+    questionContainer.style.minHeight = `${paragraphHeight}px`; // paragraph minHeight
+    questionContainer.textContent = ''; // after grabbing height set question text to initial blank state 
+    questionContainer.style.color = `#fff`; // set font color
+    // animate each letter of the question
+    for (let i = 0; i < question.length; i++) {
+        let letter = question[i];
+        setTimeout(function () {
+        questionContainer.textContent += letter;
+        }, 30 * i);
+    };
+} else {
+    questionContainer ? questionContainer.style.color = `#fff` : false; //Show without animating.
+};
 
-// Poll Options Bounce Animation
-// grab all poll options
-const pollOptionElements = document.querySelectorAll('.poll-option');
-
+// function for event listener to change styles of clicked poll option
 function vote() {
     for (let k=0; k<pollOptionElements.length; k++){
         pollOptionElements[k].querySelector('span.answer-label').classList.remove('answer-label-selected');
@@ -176,11 +118,11 @@ function vote() {
     this.querySelector('span.answer-label').classList.add('answer-label-selected');
 }
 
+//Initialize Poll Options UI
 // Animate percentage bars and poll option bounce
 if (pollOptionElements) {
-
     // Add event listener to poll option containers so that entire poll option can be clicked
-    if (hasVoted() == 'false' && active() == 'true'){
+    if (!hasVoted() && active()){
         for (var i=0; i < pollOptionElements.length; i++){
             pollOptionElements[i].addEventListener('click', vote);
         };
@@ -190,16 +132,9 @@ if (pollOptionElements) {
         };
     };
 
-    
-    if (hasVoted() == 'true' || active() == 'false'){
-        document.querySelector('button').style.cursor = 'default';
-        document.querySelector('button').disabled = true;
-    };
-
-    
     // Iterate through all pollOptionElements
+    // animate to create bounce effect of each poll option
     for (var i=0; i < pollOptionElements.length; i++){
-        // animate transform translate to create bounce effect of each poll option
         var pollOption = pollOptionElements[i];
         var animation = pollOption.animate([
             { transform: 'translateY(-10px)' },
@@ -220,14 +155,21 @@ if (pollOptionElements) {
             easing: 'cubic-bezier(0.68, 0.8, 0.27, 1.55)'
         });
 
+        // Select the users existing vote
         let vote = document.querySelector('#question-container').dataset.uservote;
-        if (pollOption.classList.contains(vote)){
+        if (pollOption.dataset.answer == vote){
             pollOption.querySelector('span.answer-label').classList.toggle('answer-label-selected');
         };
     };
+
+    // If user has voted disable vote button
+    if (hasVoted() || !active()){
+        document.querySelector('button').style.cursor = 'default';
+        document.querySelector('button').disabled = true;
+    };
 };
 
-
+// Function to handle poll timer
 window.addEventListener('DOMContentLoaded', () => {
     const timerElement = document.getElementById('poll-timer');
     const initialHours = parseInt(timerElement.dataset.hours);
@@ -272,3 +214,67 @@ window.addEventListener('DOMContentLoaded', () => {
     updateTimer();
     const intervalId = setInterval(updateTimer, 60000); // Update every minute
   });
+
+  
+//
+// SocketIO Start
+///////////////////////////////////
+
+const socket = io(); // create io object
+
+// Join socketIO room with pollId
+socket.emit('join', pollId);
+
+// Listen for connection success message
+socket.on('connected-to-poll', room => {
+    console.log('LivePoll Connected');
+});
+
+// Handle update votes
+socket.on('update-poll-results', (voteData) => {
+    // set variables with data
+    const vote = voteData.vote; 
+    const voteCount = voteData.voteCount;
+    const totalVotes = voteData.totalVotes;
+    // calculate new percentage
+    const percentage = (voteCount / totalVotes) * 100;
+    // grab percentage bar element
+    const percentageBar = document.querySelector(`.percentage-bar.${vote}`);
+    // set the textContent for the value with the updated vote count.
+    document.getElementById(vote).textContent = voteCount;
+    // set percentage bar width with new width for vote
+    percentageBar.style.width = `${percentage}%`;
+    // grab all poll options
+    const pollOptions = document.getElementsByClassName('poll-option');
+    // set the total votes output to the updated todal votes
+    document.getElementById('total-votes').textContent = totalVotes;
+    // iterate through all of the poll options and update the percentage bars
+    for (var i=0; i < pollOptions.length; i++){
+        var pollOption = pollOptions[i]; // grab specific poll option
+        var pollOptionValue = pollOption.querySelector('.vote-count').textContent; // grab the amount of votes
+        const pollOptionPercentageBar = pollOption.querySelector('.percentage-bar');  // grab the percentage bar 
+        var newPercentageValue = (pollOptionValue / totalVotes) * 100; // calculate new percentage using vote value and total votes
+        pollOptionPercentageBar.style.width = `${newPercentageValue}%`; // update style value of poll option percentage bar element
+    }
+});
+
+// Handle vote success
+socket.on('vote-success', () => {
+    document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
+    document.querySelector('button').disabled = true;
+    document.querySelector('button').style.opacity = '0.3';
+    document.querySelector('button').classList.remove('blink-animation');
+    document.querySelector('button').style.cursor = "default";
+    const radioButtons = document.querySelectorAll('.poll-answers label')
+    localStorage.setItem('voted_before', 'true');
+    for (let i = 0; i < radioButtons.length; i++) {
+        radioButtons[i].style.display = "none";
+    }
+    const pollOptionElements = document.querySelectorAll('.poll-option');
+    for (var i=0; i < pollOptionElements.length; i++){
+        pollOptionElements[i].removeEventListener('click', vote);
+        pollOptionElements[i].style.cursor = "default";
+    };
+});
+
+// SocketIO End

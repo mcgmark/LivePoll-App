@@ -3,7 +3,7 @@
     <p id="question-container" class="question" data-pollid="{{poll._id}}" data-hasvoted="{{hasVoted}}" data-active="{{active}}" data-uservote="{{userVote}}">{{poll.question}}</p>
     <form>
         <fieldset class="poll-answers">
-            <div class="poll-option poll-animate answerOneCount">
+            <div class="poll-option poll-animate" data-answer="answerOneCount">
                 <div class="poll-option-container">
                     {{#if active}}
                         {{#unless hasVoted}}
@@ -15,7 +15,7 @@
                 </div>
                 <div class="percentage-bar answerOneCount" style="width:{{percent poll.answerOneCount poll.totalVotes}}"></div>
             </div>
-            <div class="poll-option poll-animate answerTwoCount">
+            <div class="poll-option poll-animate" data-answer="answerTwoCount">
                 <div class="poll-option-container">
                     {{#if active}}
                         {{#unless hasVoted}}
@@ -28,7 +28,7 @@
                 <div class="percentage-bar answerTwoCount" style="width:{{percent poll.answerTwoCount poll.totalVotes}}"></div>
             </div>
             {{#if poll.answerThree}}
-            <div class="poll-option poll-animate answerThreeCount">
+            <div class="poll-option poll-animate" data-answer="answerThreeCount">
                 <div class="poll-option-container">
                     {{#if active}}
                         {{#unless hasVoted}}
@@ -42,7 +42,7 @@
             </div>
             {{/if}}
             {{#if poll.answerFour}}
-            <div class="poll-option poll-animate answerFourCount">
+            <div class="poll-option poll-animate" data-answer="answerFourCount">
                 <div class="poll-option-container">
                     {{#if active}}
                         {{#unless hasVoted}}
@@ -60,7 +60,7 @@
             {{#if hasVoted}}
                 <button id="vote-btn-voted">You Have Already Voted!</button>
             {{else}}
-                <button id="vote-btn" class="blink-animation">tap here to vote <i class="fa-solid fa-bolt"></i></button>
+                <button id="vote-btn" class="blink-animation">vote <i class="fa-solid fa-bolt"></i></button>
             {{/if}}
         {{else}}
                 <button id="vote-btn-voted">Poll Closed!</button>
@@ -71,9 +71,9 @@
         {{#if poll}}
             <div id="username-display-inner">
                 <div id="poll-info">
-                    <div><span>Total Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
+                    <div><span>Votes</span><p id="total-votes">{{poll.totalVotes}}</p></div>
                     <div><span>Started By</span><p><a href="/users/{{poll.username}}">{{poll.username}}</a></p></div>
-                    <div><span>Poll Timer</span>
+                    <div><span>Timer</span>
                         {{#if active}}
                             <p id="poll-timer" data-hours="{{hours}}" data-minutes="{{minutes}}">{{hours}}h<span class="animate-blink">:</span>{{minutes}}m</p>
                         {{else}}

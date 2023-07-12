@@ -402,6 +402,10 @@ article {
   padding-right: 20px;
 }
 
+article.expired {
+  opacity: 0.3;
+}
+
 article .poll-list-link {
   font-family: 'Cabin';
   color:rgb(134, 17, 143);

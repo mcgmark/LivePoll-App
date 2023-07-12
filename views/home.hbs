@@ -11,7 +11,7 @@
     <section id="polls-list">
         {{#each polls}}
         <a href="/polls/{{this.id}}" title="view">
-        <article class="poll-animate"> 
+        <article class="poll-animate {{#unless this.active}}expired{{/unless}}"> 
             <p class="poll-list-link">{{this.question}}</p>  
             <div>
                 <span>VOTES</span>
