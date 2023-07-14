@@ -1,6 +1,7 @@
 // grab dom elements
 const pollVoteButton = document.getElementById("vote-btn");
 const questionContainer = document.querySelector('#question-container');
+let pollId;
 questionContainer ? pollId = document.querySelector('#question-container').dataset.pollid : false;
 
 // grab all poll options
@@ -72,6 +73,14 @@ pollVoteButton ? pollVoteButton.onclick = function(e) {
     };
 } : false;
 
+// If user has voted disable vote button
+if (hasVoted() || !active()){
+    if (document.getElementById('tab').classList.contains('poll-container')){
+        document.querySelector('button').style.cursor = 'default';
+        document.querySelector('button').disabled = true;
+    }
+};
+
 
 //
 //   Page UI Animations on page load
@@ -118,7 +127,6 @@ function vote() {
     this.querySelector('span.answer-label').classList.add('answer-label-selected');
 }
 
-//Initialize Poll Options UI
 // Animate percentage bars and poll option bounce
 if (pollOptionElements) {
     // Add event listener to poll option containers so that entire poll option can be clicked
@@ -161,59 +169,56 @@ if (pollOptionElements) {
             pollOption.querySelector('span.answer-label').classList.toggle('answer-label-selected');
         };
     };
-
-    // If user has voted disable vote button
-    if (hasVoted() || !active()){
-        document.querySelector('button').style.cursor = 'default';
-        document.querySelector('button').disabled = true;
-    };
 };
 
-// Function to handle poll timer
+// poll timer
 window.addEventListener('DOMContentLoaded', () => {
-    const timerElement = document.getElementById('poll-timer');
-    const initialHours = parseInt(timerElement.dataset.hours);
-    const initialMinutes = parseInt(timerElement.dataset.minutes);
+    if (document.getElementById('tab').classList.contains('poll-container')){
+        const timerElement = document.getElementById('poll-timer');
+        const initialHours = parseInt(timerElement.dataset.hours);
+        const initialMinutes = parseInt(timerElement.dataset.minutes);
 
-    let hours = initialHours;
-    let minutes = initialMinutes;
+        let hours = initialHours;
+        let minutes = initialMinutes;
 
-    const updateTimer = () => {
-      if (hours == 0 && minutes == 0) {
-        clearInterval(intervalId);
-        document.querySelector('.animate-blink').classList.remove('animate-blink');
-        document.querySelector('button').innerText = 'POLL CLOSED!'
-        document.querySelector('button').disabled = true;
-        document.querySelector('button').style.opacity = '0.3';
-        document.querySelector('button').classList.remove('blink-animation');
-        document.querySelector('button').style.cursor = "default";
-        timerElement.innerHTML = 'closed';
-        const radioButtons = document.querySelectorAll('.poll-answers label')
-        localStorage.setItem('voted_before', 'true');
-        for (let i = 0; i < radioButtons.length; i++) {
-            radioButtons[i].style.display = "none";
+        const updateTimer = () => {
+        if (hours == 0 && minutes == 0) {
+            clearInterval(intervalId);
+            document.querySelector('.animate-blink').classList.remove('animate-blink');
+            document.querySelector('button').innerText = 'POLL CLOSED!'
+            document.querySelector('button').disabled = true;
+            document.querySelector('button').style.opacity = '0.3';
+            document.querySelector('button').classList.remove('blink-animation');
+            document.querySelector('button').style.cursor = "default";
+            timerElement.innerHTML = 'closed';
+            const radioButtons = document.querySelectorAll('.poll-answers label')
+            localStorage.setItem('voted_before', 'true');
+            for (let i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].style.display = "none";
+            }
+            const pollOptionElements = document.querySelectorAll('.poll-option');
+            for (var i=0; i < pollOptionElements.length; i++){
+                pollOptionElements[i].removeEventListener('click', vote);
+                pollOptionElements[i].style.cursor = "default";
+            };
+            return;
         }
-        const pollOptionElements = document.querySelectorAll('.poll-option');
-        for (var i=0; i < pollOptionElements.length; i++){
-            pollOptionElements[i].removeEventListener('click', vote);
-            pollOptionElements[i].style.cursor = "default";
+
+        if (minutes == 0) {
+            hours--;
+            minutes = 59;
+        } else {
+            minutes--;
+        }
+
+        timerElement.innerHTML = `${hours.toString().padStart(2, '0')}h<span class="animate-blink">:</span>${minutes.toString().padStart(2, '0')}m`;
         };
-        return;
-      }
 
-      if (minutes == 0) {
-        hours--;
-        minutes = 59;
-      } else {
-        minutes--;
-      }
+        updateTimer();
+        const intervalId = setInterval(updateTimer, 60000); // Update every minute
 
-      timerElement.innerHTML = `${hours.toString().padStart(2, '0')}h<span class="animate-blink">:</span>${minutes.toString().padStart(2, '0')}m`;
     };
-
-    updateTimer();
-    const intervalId = setInterval(updateTimer, 60000); // Update every minute
-  });
+});
 
   
 //

@@ -46,7 +46,12 @@ router.get('/:id', global.hasVoted, global.pollOpen, async function(req, res) {
     try {
       const poll = await Poll.findById(pollId);
       if (!poll) {
-        res.status(404).send('Poll not found');
+        res.render('home', { 
+          polls: polls,
+          user: req.user,
+          username: username,
+          messages: "Poll Does not Exist"
+        });
       } else {
         res.render('polls/index', { 
           title: 'Poll',
@@ -62,7 +67,9 @@ router.get('/:id', global.hasVoted, global.pollOpen, async function(req, res) {
         });
       }
     } catch (err) {
-      res.status(500).send(err.message);
+      res.render('home', { 
+        messages: "Poll Does not Exist"
+      });
     }
   });
 

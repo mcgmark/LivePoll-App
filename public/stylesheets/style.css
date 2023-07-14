@@ -286,6 +286,10 @@ p.login{
   text-transform: none;
 }
 
+section.login a {
+  color: #fff;
+}
+
 p.messages-error {
   font-family: 'Oswald';
   font-style: normal;

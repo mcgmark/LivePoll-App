@@ -81,8 +81,13 @@ router.get('/:username', async function(req, res) {
       try {
         const polls = await Poll.find({username: username});
         const pollCount = await Poll.count({username: username});
-        if (!polls) {
-          res.status(404).send('Poll not found');
+        if (polls.length == 0) {
+          res.render('home', { 
+            polls: polls,
+            user: req.user,
+            username: username,
+            messages: "User Does not Exist"
+          });
         } else {
           res.render('home', { 
             polls: polls,
