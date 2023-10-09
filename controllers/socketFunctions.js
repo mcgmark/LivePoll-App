@@ -8,6 +8,8 @@ module.exports = io => {
 
         // Grab user ip
         const ipAddress = socket.handshake.headers["x-forwarded-for"]?.split(",")[0] ?? "::1";
+
+        console.log(socket.handshake.headers);
  
         // Initialize variables to store id of player socket client
         const userId = socket.id;
