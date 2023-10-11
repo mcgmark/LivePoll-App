@@ -4,6 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require("hbs");
+// const expressIp = require('express-ip');
 
 
 const index = require('./controllers/index');
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public/')));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 app.use('/fontawesome', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free')));
 
+// app.use(expressIp().getIpInfoMiddleware);
 
 // Use dotenv to read .env file for user environment variables (aka secrets)
 if(process.env.NODE_ENV != 'production'){

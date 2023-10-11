@@ -63,7 +63,7 @@ router.get('/:id', global.hasVoted, global.pollOpen, async function(req, res) {
           minutes: req.minutes,
           messages: req.messages,
           userVote: req.vote,
-          pollUrl: fullUrl
+          pollUrl: fullUrl,
         });
       }
     } catch (err) {

@@ -264,7 +264,7 @@ socket.on('update-poll-results', (voteData) => {
 });
 
 // Handle vote success
-socket.on('vote-success', () => {
+socket.on('vote-success', (userData) => {
     document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
     document.querySelector('button').disabled = true;
     document.querySelector('button').style.opacity = '0.3';
@@ -280,6 +280,7 @@ socket.on('vote-success', () => {
         pollOptionElements[i].removeEventListener('click', vote);
         pollOptionElements[i].style.cursor = "default";
     };
+    console.log(userData);
 });
 
 // SocketIO End
