@@ -235,6 +235,11 @@ socket.on('connected-to-poll', room => {
     console.log('LivePoll Connected');
 });
 
+// Listen for connection success message
+socket.on('already-voted', room => {
+    console.log('LivePoll Connected');
+});
+
 // Handle update votes
 socket.on('update-poll-results', (voteData) => {
     // set variables with data
@@ -264,7 +269,7 @@ socket.on('update-poll-results', (voteData) => {
 });
 
 // Handle vote success
-socket.on('vote-success', (userData) => {
+socket.on('vote-success', () => {
     document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
     document.querySelector('button').disabled = true;
     document.querySelector('button').style.opacity = '0.3';
@@ -280,7 +285,10 @@ socket.on('vote-success', (userData) => {
         pollOptionElements[i].removeEventListener('click', vote);
         pollOptionElements[i].style.cursor = "default";
     };
-    console.log(userData);
 });
+
+socket.on('already-voted', () => {
+    console.log("Already Voted!");
+})
 
 // SocketIO End

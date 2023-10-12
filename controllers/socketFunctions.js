@@ -16,7 +16,7 @@ module.exports = io => {
         // Handle join message
         socket.on('join', room => {
             socket.join(room); // join the socket to the roomn specific to the poll
-            io.to(room).emit('connected-to-poll'); // emit connected to room message to clients connected to specific room
+            io.to(userId).emit('connected-to-poll'); // emit connected to room message to clients connected to specific room
         });
 
         // Handle pollVote message
@@ -50,6 +50,8 @@ module.exports = io => {
                 } catch (err) {
                     console.log('vote error');
                 }
+            } else if (existingVote) {
+                io.to(userId).emit('already-voted');
             };
         });
       });    
