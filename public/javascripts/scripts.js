@@ -8,13 +8,11 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 const pollOptionElements = document.querySelectorAll('.poll-option');
 
 
-
 // function to check if user has voted using dataset
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-        let userVote = localStorage.getItem(pollId);
-        if (result === 'true' || userVote !== null) {
+        if (result === 'true') {
             return true;
         } else {
             return false;
@@ -222,33 +220,37 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
-document.addEventListener('DOMContentLoaded', function () {
+function UpdatePollLinks() {
     // Get the userId from localStorage
     const pollUserId = localStorage.getItem('pollUserId'); // check for existing userId
 
     if (pollUserId) {
-      // Select the list of links
-      const pollsList = document.getElementById('polls-list');
+        // Select the list of links
+        const pollsList = document.getElementById('polls-list');
 
-      // Get all the <a> elements inside the list
-      let pollLinks;
-      pollsList ? pollLinks = pollsList.getElementsByTagName('a') : null;
+        // Get all the <a> elements inside the list
+        let pollLinks;
+        pollsList ? pollLinks = pollsList.getElementsByTagName('a') : null;
 
-      // Loop through the <a> elements and modify their href attributes
-      if (pollLinks) {
-        for (const link of pollLinks) {
-            // Get the current href value
-            const currentHref = link.getAttribute('href');
+        // Loop through the <a> elements and modify their href attributes
+        if (pollLinks) {
+            for (const link of pollLinks) {
+                // Get the current href value
+                const currentHref = link.getAttribute('href');
 
-            // Append the userId as a query parameter
-            const updatedHref = `${currentHref}?userId=${pollUserId}`;
+                // Append the userId as a query parameter
+                const updatedHref = `${currentHref}?userId=${pollUserId}`;
 
-            // Update the href attribute with the new value
-            link.setAttribute('href', updatedHref);
+                // Update the href attribute with the new value
+                link.setAttribute('href', updatedHref);
+            };
         };
-       };
     };
-  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    UpdatePollLinks();
+});
 
   
 //
@@ -264,17 +266,16 @@ socket.emit('join', ({ pollId, pollUserId }));
 
 // Listen for connection success message
 socket.on('connected-to-poll', pollUserId => {
-    localStorage.setItem('pollUserId', pollUserId);
+    console.log('Connected to Poll Server');
+    if (pollUserId) {
+        localStorage.setItem('pollUserId', pollUserId);
+        UpdatePollLinks();
+    };
 });
 
-// Listen for connection success message
-socket.on('already-voted', () => {
-    console.log('LivePoll Connected');
-});
 
 // Handle update votes
 socket.on('update-poll-results', (voteData) => {
-    console.log("test");
     // set variables with data
     const vote = voteData.vote; 
     const voteCount = voteData.voteCount;
@@ -302,14 +303,13 @@ socket.on('update-poll-results', (voteData) => {
 });
 
 // Handle vote success
-socket.on('vote-success', (voteData) => {
+socket.on('vote-success', () => {
     document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
     document.querySelector('button').disabled = true;
     document.querySelector('button').style.opacity = '0.3';
     document.querySelector('button').classList.remove('blink-animation');
     document.querySelector('button').style.cursor = "default";
     const radioButtons = document.querySelectorAll('.poll-answers label')
-    localStorage.setItem(voteData.pollId, voteData.vote);
     for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
     }
@@ -318,6 +318,7 @@ socket.on('vote-success', (voteData) => {
         pollOptionElements[i].removeEventListener('click', vote);
         pollOptionElements[i].style.cursor = "default";
     };
+    console.log('Vote Success!');
 });
 
 socket.on('already-voted', () => {

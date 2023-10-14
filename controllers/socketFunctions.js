@@ -23,7 +23,7 @@ module.exports = io => {
                 io.to(userId).emit('connected-to-poll', pollUserId); // emit connected to room message to clients connected to specific room
             } else if (pollUserId) {
                 socket.pollUserId = pollUserId;
-                io.to(userId).emit('connected-to-poll', pollUserId); // emit connected to room message to clients connected to specific room
+                io.to(userId).emit('connected-to-poll'); // emit connected to room message to clients connected to specific room
                 console.log("User Connected:", pollUserId);
             }         
         });
@@ -54,9 +54,8 @@ module.exports = io => {
                         voteCount: updatedPoll[vote],
                         totalVotes: updatedPoll['totalVotes']
                     }; 
-                    console.log(voteData);
                     // emit message to vote socket that their vote was successfully counted
-                    io.to(userId).emit('vote-success', voteData);
+                    io.to(userId).emit('vote-success');
                     // emit message to all sockets connected to specific poll to update pol
                     io.to(id).emit('update-poll-results', voteData); 
                 } catch (err) {
