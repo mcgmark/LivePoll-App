@@ -14,10 +14,20 @@ module.exports = io => {
         const userId = socket.id;
 
         // Handle join message
-        socket.on('join', room => {
-            socket.join(room); // join the socket to the roomn specific to the poll
-            io.to(userId).emit('connected-to-poll'); // emit connected to room message to clients connected to specific room
+        socket.on('join', ({ pollId, pollUserId }) => {
+            socket.join(pollId); // join the socket to the roomn specific to the poll
+            if (pollUserId === null) {
+                const pollUserId = [...Array(4)].map(() => 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'[Math.floor(Math.random() * 62)]).join('');
+                console.log("New User Alert", pollUserId);
+                socket.pollUserId = pollUserId;
+                io.to(userId).emit('connected-to-poll', pollUserId); // emit connected to room message to clients connected to specific room
+            } else if (pollUserId) {
+                socket.pollUserId = pollUserId;
+                io.to(userId).emit('connected-to-poll', pollUserId); // emit connected to room message to clients connected to specific room
+                console.log("User Connected:", pollUserId);
+            }         
         });
+
 
         // Handle pollVote message
         socket.on('pollVote', async (pollVoteClientData) => {
@@ -25,7 +35,7 @@ module.exports = io => {
             const vote = pollVoteClientData.vote
 
             // Find vote based on ip and poll id
-            const existingVote = await Voter.findOne({ pollId: id, ipAddress: ipAddress }); 
+            const existingVote = await Voter.findOne({ pollId: id, ipAddress: socket.pollUserId }); 
 
             if (!existingVote) {
                 try {
@@ -36,15 +46,17 @@ module.exports = io => {
                         { new: true } // To return the updated document
                     );
                     // store vote in database
-                    const newVote = await Voter.create({ pollId: id, ipAddress: ipAddress, vote: vote });
+                    const newVote = await Voter.create({ pollId: id, ipAddress: socket.pollUserId, vote: vote });
                     // setup updated vote data to update all connected socket clients
                     const voteData = {
+                        pollId: id,
                         vote: vote,
                         voteCount: updatedPoll[vote],
                         totalVotes: updatedPoll['totalVotes']
                     }; 
+                    console.log(voteData);
                     // emit message to vote socket that their vote was successfully counted
-                    io.to(userId).emit('vote-success');
+                    io.to(userId).emit('vote-success', voteData);
                     // emit message to all sockets connected to specific poll to update pol
                     io.to(id).emit('update-poll-results', voteData); 
                 } catch (err) {

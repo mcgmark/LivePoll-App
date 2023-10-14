@@ -7,11 +7,14 @@ questionContainer ? pollId = document.querySelector('#question-container').datas
 // grab all poll options
 const pollOptionElements = document.querySelectorAll('.poll-option');
 
-// function to check if user has voted by checking if buttin is disabled
+
+
+// function to check if user has voted using dataset
 function hasVoted() {
     if (questionContainer) {
         let result = document.getElementById("question-container").dataset.hasvoted;
-        if (result == 'true') {
+        let userVote = localStorage.getItem(pollId);
+        if (result === 'true' || userVote !== null) {
             return true;
         } else {
             return false;
@@ -192,7 +195,6 @@ window.addEventListener('DOMContentLoaded', () => {
             document.querySelector('button').style.cursor = "default";
             timerElement.innerHTML = 'closed';
             const radioButtons = document.querySelectorAll('.poll-answers label')
-            localStorage.setItem('voted_before', 'true');
             for (let i = 0; i < radioButtons.length; i++) {
                 radioButtons[i].style.display = "none";
             }
@@ -216,9 +218,37 @@ window.addEventListener('DOMContentLoaded', () => {
 
         updateTimer();
         const intervalId = setInterval(updateTimer, 60000); // Update every minute
-
     };
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Get the userId from localStorage
+    const pollUserId = localStorage.getItem('pollUserId'); // check for existing userId
+
+    if (pollUserId) {
+      // Select the list of links
+      const pollsList = document.getElementById('polls-list');
+
+      // Get all the <a> elements inside the list
+      let pollLinks;
+      pollsList ? pollLinks = pollsList.getElementsByTagName('a') : null;
+
+      // Loop through the <a> elements and modify their href attributes
+      if (pollLinks) {
+        for (const link of pollLinks) {
+            // Get the current href value
+            const currentHref = link.getAttribute('href');
+
+            // Append the userId as a query parameter
+            const updatedHref = `${currentHref}?userId=${pollUserId}`;
+
+            // Update the href attribute with the new value
+            link.setAttribute('href', updatedHref);
+        };
+       };
+    };
+  });
 
   
 //
@@ -227,21 +257,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const socket = io(); // create io object
 
+const pollUserId = localStorage.getItem('pollUserId'); // check for existing userId
+
 // Join socketIO room with pollId
-socket.emit('join', pollId);
+socket.emit('join', ({ pollId, pollUserId }));
 
 // Listen for connection success message
-socket.on('connected-to-poll', room => {
-    console.log('LivePoll Connected');
+socket.on('connected-to-poll', pollUserId => {
+    localStorage.setItem('pollUserId', pollUserId);
 });
 
 // Listen for connection success message
-socket.on('already-voted', room => {
+socket.on('already-voted', () => {
     console.log('LivePoll Connected');
 });
 
 // Handle update votes
 socket.on('update-poll-results', (voteData) => {
+    console.log("test");
     // set variables with data
     const vote = voteData.vote; 
     const voteCount = voteData.voteCount;
@@ -269,14 +302,14 @@ socket.on('update-poll-results', (voteData) => {
 });
 
 // Handle vote success
-socket.on('vote-success', () => {
+socket.on('vote-success', (voteData) => {
     document.querySelector('button').textContent = 'SUCCESS! VOTE COUNTED';
     document.querySelector('button').disabled = true;
     document.querySelector('button').style.opacity = '0.3';
     document.querySelector('button').classList.remove('blink-animation');
     document.querySelector('button').style.cursor = "default";
     const radioButtons = document.querySelectorAll('.poll-answers label')
-    localStorage.setItem('voted_before', 'true');
+    localStorage.setItem(voteData.pollId, voteData.vote);
     for (let i = 0; i < radioButtons.length; i++) {
         radioButtons[i].style.display = "none";
     }

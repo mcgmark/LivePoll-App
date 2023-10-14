@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bayon&family=Cabin:wght@400;700&family=Oswald&display=swap');
 
 :root {
-  --purple: #430c60;
+  --purple: #340059;
   --green: #7dff9f;
   ;
 }
@@ -26,7 +26,6 @@ body {
   min-height: 100vh;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background: url('../images/bg.svg');
-  background-color: #4A136D;
   background-repeat: no-repeat;
   background-size: 3000px;
 
