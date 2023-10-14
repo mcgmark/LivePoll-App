@@ -91,9 +91,9 @@ header img {
   width: 100%;
   height: 100vh;
   padding: 20px;
-  background-color: #f5f6fa;
+  background-color: #fff;
   transform: translateX(100%);
-  transition: transform 0.5s linear;
+  transition: transform 0.25s linear;
   z-index: 50;
 }
 
@@ -256,6 +256,10 @@ p.messages {
   background: #ffffff1b;
   padding: .75rem;
   margin: 1rem auto 1rem auto;
+}
+
+p.messages.custom {
+  text-transform: none;
 }
 
 p.messages-voted {

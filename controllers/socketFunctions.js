@@ -7,7 +7,7 @@ module.exports = io => {
     io.on('connection', (socket) => {
 
         // Grab user ip
-        const ipAddress = socket.handshake.headers["x-forwarded-for"]?.split(",")[0] ?? "::1";
+        const ipAddress = socket.handshake.headers["x-forwarded-for"]?.split(",")[0] ?? "::1"; // Doesn't work on free server
    
  
         // Initialize variables to store id of player socket client
