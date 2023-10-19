@@ -1,8 +1,7 @@
-#### Comp2106-23w
-# Assignment 3 - Quik-Poll Application
+# Express Poll App With Live Updates
 
--------------------------------------------------------
-
+## What?
 Poll application using Express, Handlebars, MongoDb, Passport Auth.
 
-Live Site: <https://mm-comp2106-assignment3.onrender.com>
+---
+### Live site: http://mcgmark-001-site3.dtempurl.com/
